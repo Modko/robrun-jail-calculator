@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ROB RUN jail time calculator</title>
+<meta name="description" content="Free ROB RUN jail time calculator. Pick your unlocked schematics and Black Market items, add bank and cash, and see how many jail years one raid adds. Available in 8 languages.">
+<meta name="theme-color" content="#262626">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ROB RUN jail time calculator">
+<meta property="og:description" content="See how many jail years one raid adds, based on your unlocks, Black Market items and money.">
+<meta property="og:image" content="preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+@font-face{font-family:"Barlow";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/barlow-400-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:"Barlow";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/barlow-400-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"Barlow";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/barlow-500-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:"Barlow";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/barlow-500-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"Barlow";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/barlow-600-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:"Barlow";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/barlow-600-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"Barlow Condensed";font-style:italic;font-weight:700;font-display:swap;src:url(fonts/barlow-condensed-700-italic-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:"Barlow Condensed";font-style:italic;font-weight:700;font-display:swap;src:url(fonts/barlow-condensed-700-italic-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"Barlow Condensed";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/barlow-condensed-500-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:"Barlow Condensed";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/barlow-condensed-500-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"Barlow Condensed";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/barlow-condensed-600-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:"Barlow Condensed";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/barlow-condensed-600-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"Barlow Condensed";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/barlow-condensed-700-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:"Barlow Condensed";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/barlow-condensed-700-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/ibm-plex-mono-500-cyrillic-ext.woff2) format("woff2");unicode-range:U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/ibm-plex-mono-500-cyrillic.woff2) format("woff2");unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
+@font-face{font-family:"normal";font-style:500;font-weight:https://fonts.gstatic.com/s/ibmplexmono/v23/-F6qfjptAgt5VM-kVkqdyU8n3twJwupkp-8tFQ.woff2;font-display:swap;src:url(fonts/normal-https://fonts.gstatic.com/s/ibmplexmono/v23/-F6qfjptAgt5VM-kVkqdyU8n3twJwupkp-8tFQ.woff2-IBM Plex Mono.woff2) format("woff2");unicode-range:}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/ibm-plex-mono-500-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/ibm-plex-mono-500-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/ibm-plex-mono-600-cyrillic-ext.woff2) format("woff2");unicode-range:U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/ibm-plex-mono-600-cyrillic.woff2) format("woff2");unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
+@font-face{font-family:"normal";font-style:600;font-weight:https://fonts.gstatic.com/s/ibmplexmono/v23/-F6qfjptAgt5VM-kVkqdyU8n3vAOwupkp-8tFQ.woff2;font-display:swap;src:url(fonts/normal-https://fonts.gstatic.com/s/ibmplexmono/v23/-F6qfjptAgt5VM-kVkqdyU8n3vAOwupkp-8tFQ.woff2-IBM Plex Mono.woff2) format("woff2");unicode-range:}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/ibm-plex-mono-600-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/ibm-plex-mono-600-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+:root{
+  --board:#474747;--board-dot:#4f4f4f;--line:#d9d9d9;--lit:#f0b45a;
+  --tile:#2b2b2b;--tile-border:#1f1f1f;--tile-text:#a3a3a3;
+  --tile-on:#b9b9b9;--tile-on-text:#161616;
+  --panel:#262626;--panel-2:#303030;--text:#ececec;--muted:#a9a9a9;--rule:#3d3d3d;
+  --accent:#f0b45a;--accent-text:#1b1408;
+  --paper:#f4f1ea;--paper-text:#1d1d1d;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;--cond:"Barlow Condensed",sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--board);color:var(--text);font:14px/1.45 Barlow,system-ui,sans-serif;overflow:hidden}
+.app{position:relative;height:100vh;display:flex}
+.viewport{position:relative;flex:1;overflow:hidden;cursor:grab;touch-action:none;
+  background-color:var(--board);background-image:radial-gradient(var(--board-dot) 1px,transparent 1px);background-size:22px 22px}
+.viewport.dragging{cursor:grabbing}
+.world{position:absolute;left:0;top:0;transform-origin:0 0}
+.world svg{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
+.tile{position:absolute;width:48px;height:48px;padding:0;border:1px solid var(--tile-border);background:var(--tile);color:var(--tile-text);
+  font:600 8.5px/1.05 var(--cond);letter-spacing:.01em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;text-align:center;
+  box-shadow:0 1px 0 rgba(0,0,0,.35)}
+.tile .lbl{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;padding:0 3px;word-break:break-word}
+.tile .tier{position:absolute;left:3px;top:2px;font:700 7px/1 var(--cond);color:inherit;opacity:.8}
+.tile .jail{position:absolute;right:-6px;bottom:-7px;font:600 8px/1 var(--mono);background:#1a1a1a;color:var(--accent);border:1px solid #5b4a2c;padding:2px 3px}
+.tile .jail.ok{color:#9fd6a6;border-color:#355a3b}
+.tile .qty{position:absolute;right:-6px;top:-7px;font:600 8px/1 var(--mono);background:var(--accent);color:var(--accent-text);padding:2px 4px}
+.tile .ext{position:absolute;left:-1px;bottom:-1px;width:0;height:0;border-left:7px solid var(--accent);border-top:7px solid transparent}
+.tile.on{background:var(--tile-on);color:var(--tile-on-text);border-color:#d8d8d8}
+.tile.bought{box-shadow:inset 0 -4px 0 var(--accent),0 1px 0 rgba(0,0,0,.35)}
+.tile.sel{outline:2px solid #ffffff;outline-offset:2px}
+.tile:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.polaroid{position:absolute;background:var(--paper);color:var(--paper-text);padding:5px 5px 0;box-shadow:0 4px 10px rgba(0,0,0,.45)}
+.polaroid::before{content:"";position:absolute;left:50%;top:-6px;width:30px;height:11px;transform:translateX(-50%) rotate(-3deg);background:rgba(220,220,210,.75)}
+.polaroid .pic{background:#2f2a24;display:flex;align-items:center;justify-content:center;color:#d9c9a8}
+.polaroid .cap{font:italic 700 11px/1 var(--cond);text-transform:uppercase;text-align:center;padding:4px 0 5px;text-decoration:underline;text-underline-offset:2px}
+.cat .pic{width:60px;height:60px}
+.cat .pic svg{width:34px;height:34px}
+.cat .badge{position:absolute;right:-8px;top:-8px;font:600 10px/1 var(--mono);background:var(--accent);color:var(--accent-text);padding:3px 5px}
+.hub .pic{width:132px;height:112px;flex-direction:column;background:#1f1c18}
+.hub .num{font:600 40px/1 var(--mono);color:var(--accent)}
+.hub .unit{font:600 12px/1 var(--cond);letter-spacing:.08em;text-transform:uppercase;color:#d9c9a8;margin-top:6px}
+.hub .cap{font-size:13px;color:#b0201c;text-decoration:none;font-style:normal;transform:rotate(-2deg)}
+.hub .desc{font:500 10px/1.25 Barlow,sans-serif;color:#3a3a3a;padding:0 2px 6px;max-width:132px}
+.overlay{position:absolute;z-index:5}
+.titlebox{left:16px;top:14px;background:rgba(38,38,38,.92);border:1px solid var(--rule);padding:10px 12px;max-width:360px}
+.titlebox h1{font:700 20px/1.1 var(--cond);letter-spacing:.02em;margin:0 0 4px;text-transform:uppercase}
+.titlerow{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.langpick{position:relative;flex-shrink:0}
+.langbtn{display:flex;align-items:center;gap:7px;font:600 12px/1.2 Barlow,system-ui,sans-serif;background:#1c1c1c;color:var(--text);border:1px solid var(--rule);padding:5px 8px;cursor:pointer}
+.langbtn::after{content:"";border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid var(--muted);margin-left:1px}
+.langbtn[aria-expanded=true]::after{border-top:0;border-bottom:5px solid var(--muted)}
+.langbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.langlist{position:absolute;right:0;top:calc(100% + 4px);z-index:10;min-width:180px;margin:0;padding:4px 0;list-style:none;background:var(--panel);border:1px solid var(--rule);box-shadow:0 8px 20px rgba(0,0,0,.5)}
+.langlist li{display:flex;align-items:center;gap:9px;padding:7px 12px;font-size:13px;color:var(--text);cursor:pointer}
+.langlist li:hover,.langlist li:focus{background:var(--panel-2);outline:none}
+.langlist li:focus-visible{box-shadow:inset 3px 0 0 var(--accent)}
+.langlist li[aria-selected=true]{color:var(--accent)}
+.flag{display:block;width:20px;height:14px;flex-shrink:0;box-shadow:0 0 0 1px rgba(0,0,0,.55)}
+.titlebox p{margin:0;color:var(--muted);font-size:12.5px}
+.legend{display:flex;gap:12px;margin-top:8px;font-size:11.5px;color:var(--muted);flex-wrap:wrap}
+.legend i{display:inline-block;width:11px;height:11px;margin-right:5px;vertical-align:-1px;border:1px solid #1f1f1f}
+.zoom{left:16px;bottom:16px;display:flex;gap:6px}
+.zoom button,.plain{font:600 13px/1 Barlow,sans-serif;background:var(--panel);color:var(--text);border:1px solid var(--rule);padding:8px 11px;cursor:pointer}
+.zoom button:focus-visible,.plain:focus-visible,.act:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.detail{left:16px;bottom:64px;width:270px;background:rgba(38,38,38,.96);border:1px solid var(--rule);padding:12px}
+.detail h2{font:700 17px/1.15 var(--cond);margin:0 0 6px;text-transform:uppercase;letter-spacing:.02em}
+.detail .meta{font-size:12px;color:var(--muted);margin-bottom:8px}
+.detail dl{display:grid;grid-template-columns:1fr auto;gap:3px 10px;margin:0 0 10px;font-size:13px}
+.detail dt{color:var(--muted)}.detail dd{margin:0;text-align:right;font-family:var(--mono)}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.act{font:600 13px/1 Barlow,sans-serif;padding:9px 8px;border:1px solid var(--rule);background:var(--panel-2);color:var(--text);cursor:pointer}
+.act[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--accent-text)}
+.stepper{display:grid;grid-template-columns:32px 1fr 32px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-text)}
+.stepper button{font:700 15px/1 Barlow,sans-serif;border:0;background:transparent;color:inherit;cursor:pointer}
+.stepper span{display:flex;align-items:center;justify-content:center;font:600 12px/1 var(--mono)}
+.side{width:320px;flex-shrink:0;background:var(--panel);border-left:1px solid var(--rule);overflow:auto;padding:16px}
+.side h2{font:700 18px/1 var(--cond);text-transform:uppercase;letter-spacing:.03em;margin:0 0 10px}
+.big{font:600 44px/1 var(--mono);color:var(--accent)}
+.big-label{color:var(--muted);font-size:13px;margin-top:4px}
+dl.stats{display:grid;grid-template-columns:1fr auto;gap:5px 12px;margin:14px 0 0;font-size:13.5px}
+dl.stats dt{color:var(--muted)}dl.stats dd{margin:0;text-align:right;font-family:var(--mono)}
+.bar{height:6px;background:var(--panel-2);margin-top:12px}
+.bar span{display:block;height:100%;background:var(--accent);width:0;transition:width .2s}
+.bar-label{font-size:11.5px;color:var(--muted);margin-top:4px}
+.note{background:#3a3020;border-left:3px solid var(--accent);padding:8px 10px;font-size:12.5px;margin-top:12px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.fields .wide{grid-column:1/-1}
+label{display:block;font-size:11.5px;color:var(--muted);margin-bottom:3px}
+input[type=text]{width:100%;padding:8px 9px;border:1px solid var(--rule);background:#1c1c1c;color:var(--text);font:500 14px/1.2 var(--mono)}
+.check{display:flex;gap:8px;align-items:flex-start;margin-top:10px}
+.check label{margin:0;color:var(--text);font-size:13px}
+.hint{font-size:11.5px;color:var(--muted);margin:6px 0 0}
+details{margin-top:12px;border-top:1px solid var(--rule);padding-top:10px}
+summary{cursor:pointer;font-weight:600;font-size:13.5px}
+.extra{display:grid;grid-template-columns:1fr 92px auto;gap:6px;margin-top:8px}
+.extra input{font-family:Barlow,sans-serif}
+.picked{list-style:none;padding:0;margin:8px 0 0;font-size:12.5px;max-height:220px;overflow:auto}
+.picked li{display:flex;justify-content:space-between;gap:8px;padding:3px 0;border-bottom:1px dashed var(--rule)}
+.picked li span:last-child{font-family:var(--mono);white-space:nowrap}
+.src{font-size:11px;color:var(--muted);margin-top:16px}
+.src a{color:var(--accent)}
+.src .support{display:inline-block;font-weight:600;font-size:12.5px;border:1px solid var(--accent);padding:6px 10px;text-decoration:none}
+.src .support:hover{background:var(--accent);color:var(--accent-text)}
+.src .support:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:900px){
+  body{overflow:auto}
+  .app{flex-direction:column;height:auto}
+  .viewport{height:75vh;flex:none}
+  .side{width:auto;border-left:0;border-top:1px solid var(--rule)}
+  .detail{width:auto;right:16px}
+  .titlebox{right:16px;max-width:none}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="viewport" id="viewport" data-i18n-aria="viewportLabel">
+    <div class="world" id="world"></div>
+
+    <div class="overlay titlebox">
+      <div class="titlerow">
+        <h1>ROB RUN jail time</h1>
+        <div class="langpick" id="langPick">
+          <button type="button" class="langbtn" id="langBtn" aria-haspopup="listbox" aria-expanded="false" aria-controls="langList"></button>
+          <ul class="langlist" id="langList" role="listbox" data-i18n-aria="language" hidden></ul>
+        </div>
+      </div>
+      <p data-i18n="intro"></p>
+      <div class="legend" aria-hidden="true">
+        <span><i style="background:#2b2b2b"></i><span data-i18n="legendLocked"></span></span>
+        <span><i style="background:#b9b9b9"></i><span data-i18n="legendUnlocked"></span></span>
+        <span><i style="background:#b9b9b9;box-shadow:inset 0 -3px 0 #f0b45a"></i><span data-i18n="legendBought"></span></span>
+      </div>
+    </div>
+
+    <div class="overlay detail" id="detail" aria-live="polite"></div>
+
+    <div class="overlay zoom">
+      <button type="button" id="zoomOut" data-i18n-aria="zoomOut">−</button>
+      <button type="button" id="zoomIn" data-i18n-aria="zoomIn">+</button>
+      <button type="button" id="center" data-i18n="center"></button>
+    </div>
+  </div>
+
+  <aside class="side" aria-live="polite">
+    <h2 data-i18n="resultTitle"></h2>
+    <div class="big" id="gain">+0</div>
+    <div class="big-label" data-i18n="yearsAdded"></div>
+    <dl class="stats">
+      <dt data-i18n="statValue"></dt><dd id="sValue">$0</dd>
+      <dt data-i18n="statUnlocks"></dt><dd id="sUnlock">$0</dd>
+      <dt data-i18n="statBought"></dt><dd id="sBuy">$0</dd>
+      <dt data-i18n="statOther"></dt><dd id="sOther">$0</dd>
+      <dt data-i18n="statMoney"></dt><dd id="sMoney">$0</dd>
+      <dt data-i18n="statNew"></dt><dd id="sNew">0</dd>
+      <dt data-i18n="statNext"></dt><dd id="sNext">$0</dd>
+    </dl>
+    <div class="bar" aria-hidden="true"><span id="capBar"></span></div>
+    <div class="bar-label" id="capLabel"></div>
+    <div class="note" id="note" hidden></div>
+
+    <div class="fields">
+      <div><label for="current" data-i18n="fieldCurrent"></label><input id="current" type="text" inputmode="decimal" value="0"></div>
+      <div><label for="today" data-i18n="fieldToday"></label><input id="today" type="text" inputmode="decimal" value="0"></div>
+      <div><label for="bank" data-i18n="fieldBank"></label><input id="bank" type="text" inputmode="decimal" value="0"></div>
+      <div><label for="cash" data-i18n="fieldCash"></label><input id="cash" type="text" inputmode="decimal" value="0"></div>
+      <div class="wide"><label for="other" data-i18n="fieldOther"></label><input id="other" type="text" inputmode="decimal" value="0"></div>
+    </div>
+    <div class="check"><input type="checkbox" id="lenny"><label for="lenny" data-i18n="lenny"></label></div>
+    <p class="hint" data-i18n="amountHint"></p>
+
+    <details>
+      <summary data-i18n="extrasTitle"></summary>
+      <p class="hint" data-i18n="extrasHint"></p>
+      <div id="extras"></div>
+      <button type="button" class="plain" id="addExtra" style="margin-top:8px" data-i18n="addExtra"></button>
+    </details>
+
+    <details>
+      <summary data-i18n="pickedTitle"></summary>
+      <ul class="picked" id="picked"></ul>
+      <button type="button" class="plain" id="reset" style="margin-top:8px" data-i18n="reset"></button>
+    </details>
+
+    <details>
+      <summary data-i18n="rulesTitle"></summary>
+      <div class="fields">
+        <div><label for="rate" data-i18n="fieldRate"></label><input id="rate" type="text" inputmode="decimal" value="500000"></div>
+        <div><label for="base" data-i18n="fieldBase"></label><input id="base" type="text" inputmode="decimal" value="1"></div>
+        <div><label for="capState" data-i18n="fieldCapState"></label><input id="capState" type="text" inputmode="decimal" value="40"></div>
+        <div><label for="capDay" data-i18n="fieldCapDay"></label><input id="capDay" type="text" inputmode="decimal" value="40"></div>
+        <div><label for="capTotal" data-i18n="fieldCapTotal"></label><input id="capTotal" type="text" inputmode="decimal" value="1200"></div>
+      </div>
+      <p class="hint" data-i18n="rulesHint"></p>
+    </details>
+
+    <p class="src"><span data-i18n="srcPrices"></span> <a href="https://robrunstash.vercel.app/black-market/">robrunstash</a>, <a href="https://metaforge.app/rob-run/best-weapons-in-rob-run">metaforge.app</a>, <span data-i18n="srcRules"></span> <a href="https://robrun.info/mechanics/police/">robrun.info</a>. <span data-i18n="srcPatch"></span></p>
+    <p class="src" id="supportRow" hidden><a id="supportLink" class="support" rel="noopener noreferrer" target="_blank" data-i18n="support"></a></p>
+    <p class="src" data-i18n="disclaimer"></p>
+  </aside>
+</div>
+</div>
+
+<script>
+(() => {
+  const CATEGORIES = {
+    D: { dir: -1, side: -1, order: 3, icon: "doc" },
+    V: { dir: 1, side: -1, order: 2, icon: "car" },
+    C: { dir: -1, side: -1, order: 1, icon: "house" },
+    F: { dir: -1, side: 1, order: 1, icon: "box" },
+    W: { dir: 1, side: 1, order: 2, icon: "gun" },
+    P: { dir: -1, side: 1, order: 3, icon: "plant" },
+    E: { dir: 1, side: 1, order: 4, icon: "vest" },
+    G: { dir: -1, side: 1, order: 5, icon: "gadget" }
+  };
+
+  const I18N = {
+    en: {
+      locale: "en-US",
+      pageTitle: "ROB RUN jail time calculator",
+      language: "Language",
+      viewportLabel: "Black Market schematics, drag to pan, scroll to zoom",
+      intro: "Click a tile, then Unlock or Buy. Unlocking an item also unlocks everything before it. Drag to pan, scroll to zoom.",
+      legendLocked: "Locked",
+      legendUnlocked: "Unlocked",
+      legendBought: "Bought",
+      zoomOut: "Zoom out",
+      zoomIn: "Zoom in",
+      center: "Center",
+      resultTitle: "Raid result",
+      yearsAdded: "years added",
+      statValue: "Total value",
+      statUnlocks: "Unlocks",
+      statBought: "Bought items",
+      statOther: "Other items",
+      statMoney: "Bank and cash",
+      statNew: "New jail time",
+      statNext: "To next year",
+      fieldCurrent: "Jail time now (y)",
+      fieldToday: "Gained today (y)",
+      fieldBank: "Bank ($)",
+      fieldCash: "Cash ($)",
+      fieldOther: "Value of other items ($)",
+      lenny: "Paid off Lenny's $1,000,000 debt (+10 y bonus)",
+      amountHint: "You can also type amounts like 500k or 2.5m.",
+      extrasTitle: "Other items one by one",
+      extrasHint: "Added to the field above.",
+      addExtra: "Add item",
+      pickedTitle: "Selected items",
+      reset: "Clear selection",
+      rulesTitle: "Calculation rules",
+      fieldRate: "$ per 1 year",
+      fieldBase: "Base (y)",
+      fieldCapState: "Limit per server (y)",
+      fieldCapDay: "Daily limit (y)",
+      fieldCapTotal: "Total limit (y)",
+      rulesHint: "Community values, not confirmed by Kefir. Sources disagree on whether the base 1 year is added.",
+      srcPrices: "Prices:",
+      srcRules: "rules:",
+      srcPatch: "May change with patches.",
+      disclaimer: "Fan-made tool. Not affiliated with or endorsed by Kefir. ROB RUN is a trademark of its owner.",
+      support: "Support this project",
+      catD: "Documents", catV: "Vehicles", catC: "Construction", catF: "Furniture",
+      catW: "Weapons", catP: "Production", catE: "Equipment", catG: "Gadgets",
+      hubUnit: "years per raid",
+      hubDesc: "Unlock and buy what you own. The result updates instantly.",
+      years: (n) => `${n} y`,
+      jailBadge: (n) => `${n}y`,
+      tileLabel: (name, unlocked, qty) => `${name}, ${unlocked ? "unlocked" : "locked"}${qty ? `, bought ${qty}` : ""}`,
+      pickTile: "Pick a tile",
+      pickTileHint: "Click any item in the schematics to unlock or buy it here.",
+      district: (tier) => `District ${tier}`,
+      noDistrict: "No district",
+      requires: (name) => `Requires: ${name}`,
+      unlockCost: "Unlock",
+      free: "free",
+      price: "Black Market price",
+      jailNeeded: "Required jail time",
+      missing: " (missing)",
+      unlock: "Unlock",
+      unlocked: "Unlocked",
+      buy: "Buy",
+      less: "Fewer",
+      more: "More",
+      pieces: (n) => `${n} pcs`,
+      itemName: "Name",
+      itemNameLabel: "Item name",
+      itemValueLabel: "Item value",
+      remove: "Remove",
+      removeLabel: "Remove item",
+      pickedUnlock: (name) => `${name} (unlock)`,
+      pickedBought: (name, n) => `${name} (${n} pcs)`,
+      itemFallback: "Item",
+      nothingYet: "Nothing yet.",
+      limit: "limit",
+      capLabel: (have, cap, full) => `${have} of ${cap} y per server (full limit at ${full})`,
+      noteOverCap: (n) => `${n} y over the server limit will be lost.`,
+      noteDaily: (n) => `The daily limit only lets you gain ${n} y.`,
+      noteTotal: (n) => `You will hit the total limit of ${n} y.`,
+      noteJail: (list) => `You don't have enough jail time for these unlocks yet: ${list}.`
+    },
+    sk: {
+      locale: "sk-SK",
+      pageTitle: "ROB RUN jail time kalkulačka",
+      language: "Jazyk",
+      viewportLabel: "Schéma Black Marketu, ťahaj myšou pre posun, koliesko pre zoom",
+      intro: "Klikni na políčko a daj Unlock alebo Kúpiť. Unlock vyššej veci odomkne aj všetko pred ňou. Ťahaj pre posun, koliesko pre zoom.",
+      legendLocked: "Zamknuté",
+      legendUnlocked: "Odomknuté",
+      legendBought: "Kúpené",
+      zoomOut: "Oddialiť",
+      zoomIn: "Priblížiť",
+      center: "Na stred",
+      resultTitle: "Výsledok raidu",
+      yearsAdded: "rokov pribudne",
+      statValue: "Hodnota majetku",
+      statUnlocks: "Unlocky",
+      statBought: "Kúpené veci",
+      statOther: "Ostatné itemy",
+      statMoney: "Banka a hotovosť",
+      statNew: "Nový jail time",
+      statNext: "Do ďalšieho roka",
+      fieldCurrent: "Jail time teraz (r.)",
+      fieldToday: "Dnes získané (r.)",
+      fieldBank: "Banka ($)",
+      fieldCash: "Čisté peniaze ($)",
+      fieldOther: "Hodnota ostatných itemov ($)",
+      lenny: "Splatený Lennyho dlh $1 000 000 (+10 r. bonus)",
+      amountHint: "Sumy môžeš písať aj ako 500k alebo 2.5m.",
+      extrasTitle: "Ostatné itemy po kusoch",
+      extrasHint: "Pripočítajú sa k poľu vyššie.",
+      addExtra: "Pridať item",
+      pickedTitle: "Vybrané veci",
+      reset: "Zrušiť celý výber",
+      rulesTitle: "Pravidlá výpočtu",
+      fieldRate: "$ za 1 rok",
+      fieldBase: "Základ (r.)",
+      fieldCapState: "Limit na server (r.)",
+      fieldCapDay: "Denný limit (r.)",
+      fieldCapTotal: "Celkový limit (r.)",
+      rulesHint: "Komunitné hodnoty, Kefir ich nepotvrdil. Zdroje sa nezhodujú, či sa pripočíta základný 1 rok.",
+      srcPrices: "Ceny:",
+      srcRules: "pravidlá:",
+      srcPatch: "Môžu sa meniť s patchom.",
+      disclaimer: "Fanúšikovský nástroj. Nie je spojený s Kefirom ani ním schválený. ROB RUN je ochranná známka svojho vlastníka.",
+      support: "Podporiť projekt",
+      catD: "Dokumenty", catV: "Vozidlá", catC: "Stavby", catF: "Nábytok",
+      catW: "Zbrane", catP: "Produkcia", catE: "Výbava", catG: "Gadgety",
+      hubUnit: "rokov za raid",
+      hubDesc: "Odomkni a kúp, čo máš. Výsledok sa ráta hneď.",
+      years: (n) => `${n} r.`,
+      jailBadge: (n) => `${n}r`,
+      tileLabel: (name, unlocked, qty) => `${name}, ${unlocked ? "odomknuté" : "zamknuté"}${qty ? `, kúpené ${qty} ks` : ""}`,
+      pickTile: "Vyber políčko",
+      pickTileHint: "Klikni na ktorúkoľvek vec v schéme a tu ju odomkneš alebo kúpiš.",
+      district: (tier) => `District ${tier}`,
+      noDistrict: "Bez districtu",
+      requires: (name) => `Po: ${name}`,
+      unlockCost: "Unlock",
+      free: "zadarmo",
+      price: "Cena na Black Markete",
+      jailNeeded: "Potrebný jail time",
+      missing: " (chýba)",
+      unlock: "Unlock",
+      unlocked: "Unlocked",
+      buy: "Kúpiť",
+      less: "Menej kusov",
+      more: "Viac kusov",
+      pieces: (n) => `${n} ks`,
+      itemName: "Názov",
+      itemNameLabel: "Názov itemu",
+      itemValueLabel: "Hodnota itemu",
+      remove: "Zmazať",
+      removeLabel: "Zmazať item",
+      pickedUnlock: (name) => `${name} (unlock)`,
+      pickedBought: (name, n) => `${name} (${n} ks)`,
+      itemFallback: "Item",
+      nothingYet: "Zatiaľ nič.",
+      limit: "limit",
+      capLabel: (have, cap, full) => `${have} z ${cap} r. na server (plný limit pri ${full})`,
+      noteOverCap: (n) => `${n} r. nad limit servera prepadne.`,
+      noteDaily: (n) => `Denný limit ťa pustí len na ${n} r.`,
+      noteTotal: (n) => `Narazíš na celkový limit ${n} r.`,
+      noteJail: (list) => `Na tieto unlocky ešte nemáš jail time: ${list}.`
+    },
+    ru: {
+      locale: "ru-RU",
+      pageTitle: "Калькулятор срока ROB RUN",
+      language: "Язык",
+      viewportLabel: "Схема чёрного рынка, перетаскивайте для перемещения, колесо для масштаба",
+      intro: "Нажмите на ячейку, затем «Открыть» или «Купить». Открытие предмета открывает и всё, что перед ним. Перетаскивайте для перемещения, колесо для масштаба.",
+      legendLocked: "Закрыто",
+      legendUnlocked: "Открыто",
+      legendBought: "Куплено",
+      zoomOut: "Отдалить",
+      zoomIn: "Приблизить",
+      center: "В центр",
+      resultTitle: "Итог рейда",
+      yearsAdded: "лет добавится",
+      statValue: "Стоимость имущества",
+      statUnlocks: "Открытия",
+      statBought: "Купленные предметы",
+      statOther: "Другие предметы",
+      statMoney: "Банк и наличные",
+      statNew: "Новый срок",
+      statNext: "До следующего года",
+      fieldCurrent: "Срок сейчас (г.)",
+      fieldToday: "Получено сегодня (г.)",
+      fieldBank: "Банк ($)",
+      fieldCash: "Наличные ($)",
+      fieldOther: "Стоимость других предметов ($)",
+      lenny: "Долг Ленни $1 000 000 выплачен (+10 г. бонус)",
+      amountHint: "Суммы можно писать как 500k или 2.5m.",
+      extrasTitle: "Другие предметы по отдельности",
+      extrasHint: "Прибавляются к полю выше.",
+      addExtra: "Добавить предмет",
+      pickedTitle: "Выбранные предметы",
+      reset: "Сбросить весь выбор",
+      rulesTitle: "Правила расчёта",
+      fieldRate: "$ за 1 год",
+      fieldBase: "База (г.)",
+      fieldCapState: "Лимит на сервер (г.)",
+      fieldCapDay: "Дневной лимит (г.)",
+      fieldCapTotal: "Общий лимит (г.)",
+      rulesHint: "Значения от сообщества, Kefir их не подтверждал. Источники расходятся в том, добавляется ли базовый 1 год.",
+      srcPrices: "Цены:",
+      srcRules: "правила:",
+      srcPatch: "Могут меняться с патчами.",
+      disclaimer: "Фанатский инструмент. Не связан с Kefir и не одобрен ею. ROB RUN является товарным знаком своего владельца.",
+      support: "Поддержать проект",
+      catD: "Документы", catV: "Транспорт", catC: "Стройка", catF: "Мебель",
+      catW: "Оружие", catP: "Производство", catE: "Снаряжение", catG: "Гаджеты",
+      hubUnit: "лет за рейд",
+      hubDesc: "Откройте и купите то, что у вас есть. Результат считается сразу.",
+      years: (n) => `${n} г.`,
+      jailBadge: (n) => `${n}г`,
+      tileLabel: (name, unlocked, qty) => `${name}, ${unlocked ? "открыто" : "закрыто"}${qty ? `, куплено ${qty} шт.` : ""}`,
+      pickTile: "Выберите ячейку",
+      pickTileHint: "Нажмите на любой предмет в схеме, чтобы открыть или купить его здесь.",
+      district: (tier) => `Район ${tier}`,
+      noDistrict: "Без района",
+      requires: (name) => `Требует: ${name}`,
+      unlockCost: "Открытие",
+      free: "бесплатно",
+      price: "Цена на чёрном рынке",
+      jailNeeded: "Нужный срок",
+      missing: " (не хватает)",
+      unlock: "Открыть",
+      unlocked: "Открыто",
+      buy: "Купить",
+      less: "Меньше",
+      more: "Больше",
+      pieces: (n) => `${n} шт.`,
+      itemName: "Название",
+      itemNameLabel: "Название предмета",
+      itemValueLabel: "Стоимость предмета",
+      remove: "Удалить",
+      removeLabel: "Удалить предмет",
+      pickedUnlock: (name) => `${name} (открытие)`,
+      pickedBought: (name, n) => `${name} (${n} шт.)`,
+      itemFallback: "Предмет",
+      nothingYet: "Пока ничего.",
+      limit: "лимит",
+      capLabel: (have, cap, full) => `${have} из ${cap} г. на сервер (полный лимит при ${full})`,
+      noteOverCap: (n) => `${n} г. сверх лимита сервера пропадут.`,
+      noteDaily: (n) => `Дневной лимит позволит получить только ${n} г.`,
+      noteTotal: (n) => `Вы упрётесь в общий лимит ${n} г.`,
+      noteJail: (list) => `Для этих открытий у вас пока не хватает срока: ${list}.`
+    },
+    es: {
+      locale: "es-ES",
+      pageTitle: "Calculadora de condena de ROB RUN",
+      language: "Idioma",
+      viewportLabel: "Esquema del mercado negro, arrastra para mover, rueda para hacer zoom",
+      intro: "Haz clic en una casilla y elige Desbloquear o Comprar. Al desbloquear un objeto también se desbloquea todo lo anterior. Arrastra para mover, rueda para hacer zoom.",
+      legendLocked: "Bloqueado",
+      legendUnlocked: "Desbloqueado",
+      legendBought: "Comprado",
+      zoomOut: "Alejar",
+      zoomIn: "Acercar",
+      center: "Centrar",
+      resultTitle: "Resultado del raid",
+      yearsAdded: "años se suman",
+      statValue: "Valor total",
+      statUnlocks: "Desbloqueos",
+      statBought: "Objetos comprados",
+      statOther: "Otros objetos",
+      statMoney: "Banco y efectivo",
+      statNew: "Nueva condena",
+      statNext: "Hasta el próximo año",
+      fieldCurrent: "Condena actual (años)",
+      fieldToday: "Ganado hoy (años)",
+      fieldBank: "Banco ($)",
+      fieldCash: "Efectivo ($)",
+      fieldOther: "Valor de otros objetos ($)",
+      lenny: "Deuda de Lenny de $1.000.000 pagada (+10 años de bonus)",
+      amountHint: "También puedes escribir importes como 500k o 2.5m.",
+      extrasTitle: "Otros objetos uno a uno",
+      extrasHint: "Se suman al campo de arriba.",
+      addExtra: "Añadir objeto",
+      pickedTitle: "Objetos seleccionados",
+      reset: "Borrar toda la selección",
+      rulesTitle: "Reglas de cálculo",
+      fieldRate: "$ por 1 año",
+      fieldBase: "Base (años)",
+      fieldCapState: "Límite por servidor (años)",
+      fieldCapDay: "Límite diario (años)",
+      fieldCapTotal: "Límite total (años)",
+      rulesHint: "Valores de la comunidad, no confirmados por Kefir. Las fuentes no coinciden en si se suma el año base.",
+      srcPrices: "Precios:",
+      srcRules: "reglas:",
+      srcPatch: "Pueden cambiar con los parches.",
+      disclaimer: "Herramienta hecha por fans. No está afiliada ni respaldada por Kefir. ROB RUN es una marca registrada de su propietario.",
+      support: "Apoya el proyecto",
+      catD: "Documentos", catV: "Vehículos", catC: "Construcción", catF: "Muebles",
+      catW: "Armas", catP: "Producción", catE: "Equipo", catG: "Gadgets",
+      hubUnit: "años por raid",
+      hubDesc: "Desbloquea y compra lo que tienes. El resultado se calcula al instante.",
+      years: (n) => `${n} años`,
+      jailBadge: (n) => `${n}a`,
+      tileLabel: (name, unlocked, qty) => `${name}, ${unlocked ? "desbloqueado" : "bloqueado"}${qty ? `, comprado ${qty}` : ""}`,
+      pickTile: "Elige una casilla",
+      pickTileHint: "Haz clic en cualquier objeto del esquema para desbloquearlo o comprarlo aquí.",
+      district: (tier) => `Distrito ${tier}`,
+      noDistrict: "Sin distrito",
+      requires: (name) => `Requiere: ${name}`,
+      unlockCost: "Desbloqueo",
+      free: "gratis",
+      price: "Precio en el mercado negro",
+      jailNeeded: "Condena necesaria",
+      missing: " (falta)",
+      unlock: "Desbloquear",
+      unlocked: "Desbloqueado",
+      buy: "Comprar",
+      less: "Menos",
+      more: "Más",
+      pieces: (n) => `${n} uds.`,
+      itemName: "Nombre",
+      itemNameLabel: "Nombre del objeto",
+      itemValueLabel: "Valor del objeto",
+      remove: "Eliminar",
+      removeLabel: "Eliminar objeto",
+      pickedUnlock: (name) => `${name} (desbloqueo)`,
+      pickedBought: (name, n) => `${name} (${n} uds.)`,
+      itemFallback: "Objeto",
+      nothingYet: "Nada todavía.",
+      limit: "límite",
+      capLabel: (have, cap, full) => `${have} de ${cap} años por servidor (límite completo con ${full})`,
+      noteOverCap: (n) => `Se perderán ${n} años por encima del límite del servidor.`,
+      noteDaily: (n) => `El límite diario solo te deja ${n} años.`,
+      noteTotal: (n) => `Alcanzarás el límite total de ${n} años.`,
+      noteJail: (list) => `Aún no tienes condena suficiente para estos desbloqueos: ${list}.`
+    },
+    pt: {
+      locale: "pt-BR",
+      pageTitle: "Calculadora de pena do ROB RUN",
+      language: "Idioma",
+      viewportLabel: "Esquema do mercado negro, arraste para mover, roda do mouse para zoom",
+      intro: "Clique em um bloco e escolha Desbloquear ou Comprar. Desbloquear um item também desbloqueia tudo antes dele. Arraste para mover, roda do mouse para zoom.",
+      legendLocked: "Bloqueado",
+      legendUnlocked: "Desbloqueado",
+      legendBought: "Comprado",
+      zoomOut: "Diminuir zoom",
+      zoomIn: "Aumentar zoom",
+      center: "Centralizar",
+      resultTitle: "Resultado do raid",
+      yearsAdded: "anos adicionados",
+      statValue: "Valor total",
+      statUnlocks: "Desbloqueios",
+      statBought: "Itens comprados",
+      statOther: "Outros itens",
+      statMoney: "Banco e dinheiro",
+      statNew: "Nova pena",
+      statNext: "Até o próximo ano",
+      fieldCurrent: "Pena atual (anos)",
+      fieldToday: "Ganho hoje (anos)",
+      fieldBank: "Banco ($)",
+      fieldCash: "Dinheiro ($)",
+      fieldOther: "Valor de outros itens ($)",
+      lenny: "Dívida de $1.000.000 do Lenny paga (+10 anos de bônus)",
+      amountHint: "Você também pode digitar valores como 500k ou 2.5m.",
+      extrasTitle: "Outros itens um por um",
+      extrasHint: "São somados ao campo acima.",
+      addExtra: "Adicionar item",
+      pickedTitle: "Itens selecionados",
+      reset: "Limpar seleção",
+      rulesTitle: "Regras de cálculo",
+      fieldRate: "$ por 1 ano",
+      fieldBase: "Base (anos)",
+      fieldCapState: "Limite por servidor (anos)",
+      fieldCapDay: "Limite diário (anos)",
+      fieldCapTotal: "Limite total (anos)",
+      rulesHint: "Valores da comunidade, não confirmados pela Kefir. As fontes divergem sobre se o 1 ano base é somado.",
+      srcPrices: "Preços:",
+      srcRules: "regras:",
+      srcPatch: "Podem mudar com atualizações.",
+      disclaimer: "Ferramenta feita por fãs. Sem afiliação ou endosso da Kefir. ROB RUN é marca registrada do seu proprietário.",
+      support: "Apoie o projeto",
+      catD: "Documentos", catV: "Veículos", catC: "Construção", catF: "Móveis",
+      catW: "Armas", catP: "Produção", catE: "Equipamento", catG: "Gadgets",
+      hubUnit: "anos por raid",
+      hubDesc: "Desbloqueie e compre o que você tem. O resultado é calculado na hora.",
+      years: (n) => `${n} anos`,
+      jailBadge: (n) => `${n}a`,
+      tileLabel: (name, unlocked, qty) => `${name}, ${unlocked ? "desbloqueado" : "bloqueado"}${qty ? `, ${qty} comprado(s)` : ""}`,
+      pickTile: "Escolha um bloco",
+      pickTileHint: "Clique em qualquer item do esquema para desbloquear ou comprar aqui.",
+      district: (tier) => `Distrito ${tier}`,
+      noDistrict: "Sem distrito",
+      requires: (name) => `Requer: ${name}`,
+      unlockCost: "Desbloqueio",
+      free: "grátis",
+      price: "Preço no mercado negro",
+      jailNeeded: "Pena necessária",
+      missing: " (faltando)",
+      unlock: "Desbloquear",
+      unlocked: "Desbloqueado",
+      buy: "Comprar",
+      less: "Menos",
+      more: "Mais",
+      pieces: (n) => `${n} un.`,
+      itemName: "Nome",
+      itemNameLabel: "Nome do item",
+      itemValueLabel: "Valor do item",
+      remove: "Remover",
+      removeLabel: "Remover item",
+      pickedUnlock: (name) => `${name} (desbloqueio)`,
+      pickedBought: (name, n) => `${name} (${n} un.)`,
+      itemFallback: "Item",
+      nothingYet: "Nada ainda.",
+      limit: "limite",
+      capLabel: (have, cap, full) => `${have} de ${cap} anos por servidor (limite cheio com ${full})`,
+      noteOverCap: (n) => `${n} anos acima do limite do servidor serão perdidos.`,
+      noteDaily: (n) => `O limite diário só permite mais ${n} anos.`,
+      noteTotal: (n) => `Você vai atingir o limite total de ${n} anos.`,
+      noteJail: (list) => `Você ainda não tem pena suficiente para estes desbloqueios: ${list}.`
+    },
+    de: {
+      locale: "de-DE",
+      pageTitle: "ROB RUN Haftzeit-Rechner",
+      language: "Sprache",
+      viewportLabel: "Schwarzmarkt-Schema, ziehen zum Verschieben, Mausrad zum Zoomen",
+      intro: "Klicke auf ein Feld und wähle Freischalten oder Kaufen. Wenn du etwas freischaltest, wird auch alles davor freigeschaltet. Ziehen zum Verschieben, Mausrad zum Zoomen.",
+      legendLocked: "Gesperrt",
+      legendUnlocked: "Freigeschaltet",
+      legendBought: "Gekauft",
+      zoomOut: "Herauszoomen",
+      zoomIn: "Hineinzoomen",
+      center: "Zentrieren",
+      resultTitle: "Raid-Ergebnis",
+      yearsAdded: "Jahre kommen hinzu",
+      statValue: "Gesamtwert",
+      statUnlocks: "Freischaltungen",
+      statBought: "Gekaufte Gegenstände",
+      statOther: "Andere Gegenstände",
+      statMoney: "Bank und Bargeld",
+      statNew: "Neue Haftzeit",
+      statNext: "Bis zum nächsten Jahr",
+      fieldCurrent: "Haftzeit jetzt (J.)",
+      fieldToday: "Heute erhalten (J.)",
+      fieldBank: "Bank ($)",
+      fieldCash: "Bargeld ($)",
+      fieldOther: "Wert anderer Gegenstände ($)",
+      lenny: "Lennys Schulden von $1.000.000 bezahlt (+10 J. Bonus)",
+      amountHint: "Beträge kannst du auch als 500k oder 2.5m eingeben.",
+      extrasTitle: "Andere Gegenstände einzeln",
+      extrasHint: "Werden zum Feld oben addiert.",
+      addExtra: "Gegenstand hinzufügen",
+      pickedTitle: "Ausgewählte Gegenstände",
+      reset: "Auswahl löschen",
+      rulesTitle: "Berechnungsregeln",
+      fieldRate: "$ pro 1 Jahr",
+      fieldBase: "Basis (J.)",
+      fieldCapState: "Limit pro Server (J.)",
+      fieldCapDay: "Tageslimit (J.)",
+      fieldCapTotal: "Gesamtlimit (J.)",
+      rulesHint: "Werte aus der Community, von Kefir nicht bestätigt. Die Quellen sind sich uneinig, ob das Basisjahr dazugezählt wird.",
+      srcPrices: "Preise:",
+      srcRules: "Regeln:",
+      srcPatch: "Kann sich mit Patches ändern.",
+      disclaimer: "Fan-Projekt. Nicht mit Kefir verbunden oder von Kefir unterstützt. ROB RUN ist eine Marke des jeweiligen Inhabers.",
+      support: "Projekt unterstützen",
+      catD: "Dokumente", catV: "Fahrzeuge", catC: "Bau", catF: "Möbel",
+      catW: "Waffen", catP: "Produktion", catE: "Ausrüstung", catG: "Gadgets",
+      hubUnit: "Jahre pro Raid",
+      hubDesc: "Schalte frei und kaufe, was du besitzt. Das Ergebnis wird sofort berechnet.",
+      years: (n) => `${n} J.`,
+      jailBadge: (n) => `${n}J`,
+      tileLabel: (name, unlocked, qty) => `${name}, ${unlocked ? "freigeschaltet" : "gesperrt"}${qty ? `, ${qty} gekauft` : ""}`,
+      pickTile: "Feld auswählen",
+      pickTileHint: "Klicke auf einen Gegenstand im Schema, um ihn hier freizuschalten oder zu kaufen.",
+      district: (tier) => `Bezirk ${tier}`,
+      noDistrict: "Kein Bezirk",
+      requires: (name) => `Benötigt: ${name}`,
+      unlockCost: "Freischaltung",
+      free: "kostenlos",
+      price: "Schwarzmarktpreis",
+      jailNeeded: "Benötigte Haftzeit",
+      missing: " (fehlt)",
+      unlock: "Freischalten",
+      unlocked: "Freigeschaltet",
+      buy: "Kaufen",
+      less: "Weniger",
+      more: "Mehr",
+      pieces: (n) => `${n} Stk.`,
+      itemName: "Name",
+      itemNameLabel: "Name des Gegenstands",
+      itemValueLabel: "Wert des Gegenstands",
+      remove: "Entfernen",
+      removeLabel: "Gegenstand entfernen",
+      pickedUnlock: (name) => `${name} (Freischaltung)`,
+      pickedBought: (name, n) => `${name} (${n} Stk.)`,
+      itemFallback: "Gegenstand",
+      nothingYet: "Noch nichts.",
+      limit: "Limit",
+      capLabel: (have, cap, full) => `${have} von ${cap} J. pro Server (volles Limit bei ${full})`,
+      noteOverCap: (n) => `${n} J. über dem Serverlimit verfallen.`,
+      noteDaily: (n) => `Das Tageslimit erlaubt nur noch ${n} J.`,
+      noteTotal: (n) => `Du erreichst das Gesamtlimit von ${n} J.`,
+      noteJail: (list) => `Für diese Freischaltungen fehlt dir noch Haftzeit: ${list}.`
+    },
+    fr: {
+      locale: "fr-FR",
+      pageTitle: "Calculateur de peine ROB RUN",
+      language: "Langue",
+      viewportLabel: "Schéma du marché noir, glissez pour déplacer, molette pour zoomer",
+      intro: "Cliquez sur une case, puis Débloquer ou Acheter. Débloquer un objet débloque aussi tout ce qui le précède. Glissez pour déplacer, molette pour zoomer.",
+      legendLocked: "Verrouillé",
+      legendUnlocked: "Débloqué",
+      legendBought: "Acheté",
+      zoomOut: "Dézoomer",
+      zoomIn: "Zoomer",
+      center: "Centrer",
+      resultTitle: "Résultat du raid",
+      yearsAdded: "années ajoutées",
+      statValue: "Valeur totale",
+      statUnlocks: "Déblocages",
+      statBought: "Objets achetés",
+      statOther: "Autres objets",
+      statMoney: "Banque et espèces",
+      statNew: "Nouvelle peine",
+      statNext: "Jusqu'à l'année suivante",
+      fieldCurrent: "Peine actuelle (ans)",
+      fieldToday: "Gagné aujourd'hui (ans)",
+      fieldBank: "Banque ($)",
+      fieldCash: "Espèces ($)",
+      fieldOther: "Valeur des autres objets ($)",
+      lenny: "Dette de Lenny de $1 000 000 remboursée (+10 ans de bonus)",
+      amountHint: "Vous pouvez aussi écrire les montants comme 500k ou 2.5m.",
+      extrasTitle: "Autres objets un par un",
+      extrasHint: "Ajoutés au champ ci-dessus.",
+      addExtra: "Ajouter un objet",
+      pickedTitle: "Objets sélectionnés",
+      reset: "Tout désélectionner",
+      rulesTitle: "Règles de calcul",
+      fieldRate: "$ pour 1 an",
+      fieldBase: "Base (ans)",
+      fieldCapState: "Limite par serveur (ans)",
+      fieldCapDay: "Limite quotidienne (ans)",
+      fieldCapTotal: "Limite totale (ans)",
+      rulesHint: "Valeurs de la communauté, non confirmées par Kefir. Les sources ne s'accordent pas sur l'ajout de l'année de base.",
+      srcPrices: "Prix :",
+      srcRules: "règles :",
+      srcPatch: "Peuvent changer avec les mises à jour.",
+      disclaimer: "Outil créé par des fans. Non affilié à Kefir ni approuvé par Kefir. ROB RUN est une marque de son propriétaire.",
+      support: "Soutenir le projet",
+      catD: "Documents", catV: "Véhicules", catC: "Construction", catF: "Mobilier",
+      catW: "Armes", catP: "Production", catE: "Équipement", catG: "Gadgets",
+      hubUnit: "ans par raid",
+      hubDesc: "Débloquez et achetez ce que vous possédez. Le résultat se calcule immédiatement.",
+      years: (n) => `${n} ans`,
+      jailBadge: (n) => `${n}a`,
+      tileLabel: (name, unlocked, qty) => `${name}, ${unlocked ? "débloqué" : "verrouillé"}${qty ? `, ${qty} acheté(s)` : ""}`,
+      pickTile: "Choisissez une case",
+      pickTileHint: "Cliquez sur un objet du schéma pour le débloquer ou l'acheter ici.",
+      district: (tier) => `District ${tier}`,
+      noDistrict: "Sans district",
+      requires: (name) => `Nécessite : ${name}`,
+      unlockCost: "Déblocage",
+      free: "gratuit",
+      price: "Prix au marché noir",
+      jailNeeded: "Peine requise",
+      missing: " (manquante)",
+      unlock: "Débloquer",
+      unlocked: "Débloqué",
+      buy: "Acheter",
+      less: "Moins",
+      more: "Plus",
+      pieces: (n) => `${n} pcs`,
+      itemName: "Nom",
+      itemNameLabel: "Nom de l'objet",
+      itemValueLabel: "Valeur de l'objet",
+      remove: "Supprimer",
+      removeLabel: "Supprimer l'objet",
+      pickedUnlock: (name) => `${name} (déblocage)`,
+      pickedBought: (name, n) => `${name} (${n} pcs)`,
+      itemFallback: "Objet",
+      nothingYet: "Rien pour l'instant.",
+      limit: "limite",
+      capLabel: (have, cap, full) => `${have} sur ${cap} ans par serveur (limite pleine à ${full})`,
+      noteOverCap: (n) => `${n} ans au-delà de la limite du serveur seront perdus.`,
+      noteDaily: (n) => `La limite quotidienne ne vous laisse que ${n} ans.`,
+      noteTotal: (n) => `Vous atteindrez la limite totale de ${n} ans.`,
+      noteJail: (list) => `Vous n'avez pas encore assez de peine pour ces déblocages : ${list}.`
+    },
+    zh: {
+      locale: "zh-CN",
+      pageTitle: "ROB RUN 刑期计算器",
+      language: "语言",
+      viewportLabel: "黑市图谱，拖动平移，滚轮缩放",
+      intro: "点击格子，然后选择解锁或购买。解锁某个物品会同时解锁它之前的所有物品。拖动平移，滚轮缩放。",
+      legendLocked: "未解锁",
+      legendUnlocked: "已解锁",
+      legendBought: "已购买",
+      zoomOut: "缩小",
+      zoomIn: "放大",
+      center: "居中",
+      resultTitle: "抢劫结果",
+      yearsAdded: "增加的年数",
+      statValue: "资产总值",
+      statUnlocks: "解锁",
+      statBought: "已购物品",
+      statOther: "其他物品",
+      statMoney: "银行和现金",
+      statNew: "新刑期",
+      statNext: "距下一年",
+      fieldCurrent: "当前刑期（年）",
+      fieldToday: "今日已获得（年）",
+      fieldBank: "银行（$）",
+      fieldCash: "现金（$）",
+      fieldOther: "其他物品价值（$）",
+      lenny: "已还清 Lenny 的 $1,000,000 债务（+10 年奖励）",
+      amountHint: "金额也可以写成 500k 或 2.5m。",
+      extrasTitle: "逐个添加其他物品",
+      extrasHint: "会加到上面的字段中。",
+      addExtra: "添加物品",
+      pickedTitle: "已选物品",
+      reset: "清除全部选择",
+      rulesTitle: "计算规则",
+      fieldRate: "每 1 年的 $",
+      fieldBase: "基础（年）",
+      fieldCapState: "每服务器上限（年）",
+      fieldCapDay: "每日上限（年）",
+      fieldCapTotal: "总上限（年）",
+      rulesHint: "社区数据，未经 Kefir 确认。关于是否加上基础 1 年，各来源说法不一。",
+      srcPrices: "价格：",
+      srcRules: "规则：",
+      srcPatch: "可能随补丁变化。",
+      disclaimer: "玩家自制工具，与 Kefir 无关，也未获其认可。ROB RUN 是其所有者的商标。",
+      support: "支持本项目",
+      catD: "文件", catV: "载具", catC: "建筑", catF: "家具",
+      catW: "武器", catP: "生产", catE: "装备", catG: "小工具",
+      hubUnit: "年 / 每次抢劫",
+      hubDesc: "解锁并购买你拥有的物品，结果即时计算。",
+      years: (n) => `${n} 年`,
+      jailBadge: (n) => `${n}年`,
+      tileLabel: (name, unlocked, qty) => `${name}，${unlocked ? "已解锁" : "未解锁"}${qty ? `，已购买 ${qty} 个` : ""}`,
+      pickTile: "选择一个格子",
+      pickTileHint: "点击图谱中的任意物品，即可在此解锁或购买。",
+      district: (tier) => `${tier} 区`,
+      noDistrict: "无区域",
+      requires: (name) => `前置：${name}`,
+      unlockCost: "解锁费用",
+      free: "免费",
+      price: "黑市价格",
+      jailNeeded: "所需刑期",
+      missing: "（不足）",
+      unlock: "解锁",
+      unlocked: "已解锁",
+      buy: "购买",
+      less: "减少",
+      more: "增加",
+      pieces: (n) => `${n} 个`,
+      itemName: "名称",
+      itemNameLabel: "物品名称",
+      itemValueLabel: "物品价值",
+      remove: "删除",
+      removeLabel: "删除物品",
+      pickedUnlock: (name) => `${name}（解锁）`,
+      pickedBought: (name, n) => `${name}（${n} 个）`,
+      itemFallback: "物品",
+      nothingYet: "暂无。",
+      limit: "已达上限",
+      capLabel: (have, cap, full) => `每服务器 ${cap} 年中的 ${have} 年（达到上限需 ${full}）`,
+      noteOverCap: (n) => `超出服务器上限的 ${n} 年将作废。`,
+      noteDaily: (n) => `每日上限只允许再获得 ${n} 年。`,
+      noteTotal: (n) => `你将达到 ${n} 年的总上限。`,
+      noteJail: (list) => `你的刑期还不足以使用这些解锁：${list}。`
+    }
+  };
+
+  const LANGUAGES = [
+    ["en", "English"], ["ru", "Русский"], ["es", "Español"], ["pt", "Português (BR)"],
+    ["de", "Deutsch"], ["fr", "Français"], ["zh", "简体中文"], ["sk", "Slovenčina"]
+  ];
+
+  const starPoints = (cx, cy, outer) => Array.from({ length: 10 }, (_, index) => {
+    const radius = index % 2 ? outer * 0.382 : outer;
+    const angle = -Math.PI / 2 + index * Math.PI / 5;
+    return `${(cx + radius * Math.cos(angle)).toFixed(2)},${(cy + radius * Math.sin(angle)).toFixed(2)}`;
+  }).join(" ");
+
+  const horizontalStripes = (colors) => colors.map((fill, index) => ["rect", { x: 0, y: index * 2, width: 9, height: 2, fill }]);
+
+  const FLAGS = {
+    en: { viewBox: "0 0 60 30", shapes: [
+      ["rect", { width: 60, height: 30, fill: "#012169" }],
+      ["path", { d: "M0 0L60 30M60 0L0 30", stroke: "#fff", "stroke-width": 6 }],
+      ["path", { d: "M0 0L60 30M60 0L0 30", stroke: "#C8102E", "stroke-width": 2 }],
+      ["path", { d: "M30 0V30M0 15H60", stroke: "#fff", "stroke-width": 10 }],
+      ["path", { d: "M30 0V30M0 15H60", stroke: "#C8102E", "stroke-width": 6 }]
+    ] },
+    ru: { viewBox: "0 0 9 6", shapes: horizontalStripes(["#fff", "#0039A6", "#D52B1E"]) },
+    es: { viewBox: "0 0 3 2", shapes: [
+      ["rect", { width: 3, height: 2, fill: "#AA151B" }],
+      ["rect", { y: 0.5, width: 3, height: 1, fill: "#F1BF00" }]
+    ] },
+    pt: { viewBox: "0 0 20 14", shapes: [
+      ["rect", { width: 20, height: 14, fill: "#009C3B" }],
+      ["polygon", { points: "1.7,7 10,1.2 18.3,7 10,12.8", fill: "#FFDF00" }],
+      ["circle", { cx: 10, cy: 7, r: 3.5, fill: "#002776" }]
+    ] },
+    de: { viewBox: "0 0 9 6", shapes: horizontalStripes(["#000", "#DD0000", "#FFCE00"]) },
+    fr: { viewBox: "0 0 3 2", shapes: [
+      ["rect", { width: 1, height: 2, fill: "#0055A4" }],
+      ["rect", { x: 1, width: 1, height: 2, fill: "#fff" }],
+      ["rect", { x: 2, width: 1, height: 2, fill: "#EF4135" }]
+    ] },
+    zh: { viewBox: "0 0 30 20", shapes: [
+      ["rect", { width: 30, height: 20, fill: "#EE1C25" }],
+      ["polygon", { points: starPoints(5, 5, 3), fill: "#FFFF00" }],
+      ["polygon", { points: starPoints(10, 2, 1), fill: "#FFFF00" }],
+      ["polygon", { points: starPoints(12, 4, 1), fill: "#FFFF00" }],
+      ["polygon", { points: starPoints(12, 7, 1), fill: "#FFFF00" }],
+      ["polygon", { points: starPoints(10, 9, 1), fill: "#FFFF00" }]
+    ] },
+    sk: { viewBox: "0 0 9 6", shapes: [
+      ...horizontalStripes(["#fff", "#0B4EA2", "#EE1C25"]),
+      ["path", { d: "M1.6 1.2H4.1V3.3C4.1 4.3 2.85 4.8 2.85 4.8S1.6 4.3 1.6 3.3Z", fill: "#EE1C25", stroke: "#fff", "stroke-width": 0.12 }],
+      ["path", { d: "M1.7 4.1Q2.05 3.6 2.4 3.95Q2.85 3.45 3.3 3.95Q3.65 3.6 4 4.1L2.85 4.75Z", fill: "#0B4EA2" }],
+      ["path", { d: "M2.72 1.6H2.98V3.85H2.72ZM2.3 2H3.4V2.24H2.3ZM2.1 2.6H3.6V2.88H2.1Z", fill: "#fff" }]
+    ] }
+  };
+
+  const flagSvg = (code) => {
+    const flag = FLAGS[code];
+    const svg = svgEl("svg", { class: "flag", viewBox: flag.viewBox, preserveAspectRatio: "xMidYMid slice", "aria-hidden": "true" });
+    flag.shapes.forEach(([tag, attrs]) => svg.append(svgEl(tag, attrs)));
+    return svg;
+  };
+
+  const ICONS = {
+    gadget: "M5 7h14v10H5z M8 17v3 M16 17v3 M9 11h2 M13 11h2",
+    car: "M4 15l2-5h12l2 5v3H4z M7 18v2 M17 18v2 M7 14h1 M16 14h1",
+    doc: "M7 3h7l4 4v14H7z M14 3v4h4 M10 12h6 M10 16h6",
+    house: "M4 11l8-7 8 7 M6 10v10h12V10 M10 20v-5h4v5",
+    gun: "M3 10h15l2 2h1v2h-9l-2 5H7l1-5H3z",
+    box: "M4 8l8-4 8 4v9l-8 4-8-4z M4 8l8 4 8-4 M12 12v9",
+    plant: "M7 15h10l-1.5 6h-7z M12 15V9 M12 11c-3 0-5-2-5-5 3 0 5 2 5 5z M12 9c0-3 2-5 5-5 0 3-2 5-5 5z",
+    vest: "M8 3h8l1 3 3 2v13H4V8l3-2z M9 3c0 3 1.5 4 3 4s3-1 3-4 M8 13h8 M8 17h8"
+  };
+
+  const RAW = `
+D|0|Settlement Title Lv.1|200000|100000||
+D|1|Settlement Title Lv.2|2000000|500000||Settlement Title Lv.1
+D|2|Settlement Title Lv.3|6000000|2000000||Settlement Title Lv.2
+D|0|Land Plot Title Lv.1|100000|50000||
+D|1|Land Plot Title Lv.2|800000|200000||Land Plot Title Lv.1
+D|2|Land Plot Title Lv.3|2000000|1000000||Land Plot Title Lv.2
+D|1|Sergeant's Badge|8000|30000||
+D|2|Lieutenant's Badge|40000|200000||Sergeant's Badge
+D|3|Captain's Badge|100000|500000||Lieutenant's Badge
+V|3|Romanov R8|10000000|2000000||Helipad
+V|1|Fukurou Tensa|200000|50000||
+V|2|Steering Rack|68000|100000||Fukurou Tensa
+V|2|Racing Rotor|61500|100000|75|Steering Rack
+V|3|Reinforced Steering Rack|270000|220000||Steering Rack
+V|1|ECU|14000|30000||Fukurou Tensa
+V|2|Improved ECU|75000|160000||ECU
+V|3|High-performance ECU|330000|260000||Improved ECU
+V|2|Intercooler|72000|120000||Fukurou Tensa
+V|3|Improved Intercooler|270000|200000||Intercooler
+V|2|Royal E|1000000|200000||Fukurou Tensa
+V|3|Longhorn Wild|4500000|500000||Royal E
+V|3|Buletti Soltempra|10000000|2000000||Longhorn Wild
+V|2|Turbo Kit|79500|110000||Royal E
+V|3|Improved Turbo Kit|238000|210000||Turbo Kit
+V|1|Longhorn Van|180000|50000||
+V|2|Longhorn Titan|900000|200000||Longhorn Van
+V|3|Royal J|4000000|500000||Longhorn Titan
+V|2|Cargo Rack|86500|150000||Longhorn Titan
+V|3|Reinforced Cargo Rack|350000|250000||Cargo Rack
+V|3|Police Radio (Vehicle)|300000|200000|275|Longhorn Titan
+V|1|Trunk Bags|1200|20000||Longhorn Van
+V|2|Large Trunk Bags|70500|130000||Trunk Bags
+V|3|Spacious Trunk Bags|270000|220000||Large Trunk Bags
+C|1|Mesh Fence|15000|25000||
+C|2|Metal Fence|50000|100000||Mesh Fence
+C|3|Concrete Fence|500000|200000||Metal Fence
+C|1|Trailer|10000|0||
+C|2|Small House|600000|200000||Trailer
+C|1|Car Lift #1|10000|5000||
+C|1|Car Garage|25000|10000||Car Lift #1
+C|2|Large Car Garage|70000|40000||Car Garage
+C|2|Helipad|500000|200000||Large Car Garage
+C|1|Workshop|75000|125000||Car Lift #1
+C|1|Warehouse|100000|130000||Workshop
+C|1|Electronic Fuse Lv.1|20000|10000||
+C|2|Electronic Fuse Lv.2|100000|150000||Electronic Fuse Lv.1
+C|3|Electronic Fuse Lv.3|250000|500000||Electronic Fuse Lv.2
+C|2|Alarm System (Personal)|60000|25000||Electronic Fuse Lv.1
+C|2|Alarm System (Clan)|200000|50000||Alarm System (Personal)
+C|1|Alarm System (District)|30000|15000|105|Electronic Fuse Lv.1
+F|1|First Aid Cabinet|15000|5000||
+F|1|Banknote Counter Mk1|30000|10000||
+F|2|Banknote Counter Mk2|65000|50000||Banknote Counter Mk1
+F|3|Banknote Counter Mk3|150000|150000||Banknote Counter Mk2
+F|1|Contraband Workbench|20000|20000||
+F|2|Tool Box|200000|150000||Contraband Workbench
+F|3|Tool Box (+2 Slots)|400000|300000||Tool Box
+F|1|Label Printer Mk1|30000|15000||Contraband Workbench
+F|3|Label Printer Mk2|150000|75000||Label Printer Mk1
+F|1|Cargo Workbench|15000|5000||
+F|1|Locksmith Tools|15000|20000||Cargo Workbench
+F|2|Cargo Saw|41000|45000||Locksmith Tools
+F|3|Bench Vise|250000|100000||Cargo Saw
+F|1|Small Nightstand|4000|15000||
+F|1|Small Safe|32000|50000||Small Nightstand
+F|2|Medium Safe|68000|100000||Small Safe
+F|3|Large Safe|127000|150000||Medium Safe
+F|2|Medium Nightstand|29200|30000||Small Nightstand
+F|3|Large Nightstand|45400|50000||Medium Nightstand
+F|1|Small Rack|3500|12000||
+F|2|Medium Rack|26500|25000||Small Rack
+F|3|Large Rack|46500|45000||Medium Rack
+F|1|Small Security Cabinet|30300|40000|30|Small Rack
+F|2|Medium Security Cabinet|70000|90000|140|Small Security Cabinet
+F|3|Large Security Cabinet|132000|130000|500|Medium Security Cabinet
+F|1|Collection Table|15000|5000||
+F|1|Additional Collection|34000|25000||Collection Table
+F|2|Special Collection|100000|50000||Additional Collection
+F|3|Unique Collection|250000|100000||Special Collection
+W|0|DP-9 Mk1|300|0||
+W|1|DP-9 Mk2|300|25000||DP-9 Mk1
+W|2|LBR-44 Mk1|20000|100000||DP-9 Mk1
+W|3|Vulture 50 Mk1|50000|300000||LBR-44 Mk1
+W|3|Vulture 50 Mk2|50000|600000||Vulture 50 Mk1
+W|2|LBR-44 Mk2|20000|200000||LBR-44 Mk1
+W|0|Harris 500 Mk1|3500|15000||
+W|2|ORDR-12 Mk1|28000|160000||Harris 500 Mk1
+W|2|ORDR-12 Mk2|28000|320000||ORDR-12 Mk1
+W|3|ORDR-12 Mk3|28000|640000||ORDR-12 Mk2
+W|3|TAG-12K Mk1|110000|400000||ORDR-12 Mk1
+W|3|TAG-12K Mk2|110000|800000||TAG-12K Mk1
+W|3|TAG-12K Mk3|110000|1600000||TAG-12K Mk2
+W|1|Harris 500 Mk2|3500|30000||Harris 500 Mk1
+W|2|Harris 500 Mk3|3500|60000||Harris 500 Mk2
+W|0|MC-10 Mk1|3500|15000||
+W|1|CB45 Mk1|3780|15000|15|MC-10 Mk1
+W|1|CB45 Mk2|3780|30000|25|CB45 Mk1
+W|2|CB45 Mk3|3780|60000|35|CB45 Mk2
+W|1|MC-10 Mk2|3500|30000||MC-10 Mk1
+W|2|MC-10 Mk3|3500|60000||MC-10 Mk2
+W|2|JP-7 Mk1|29000|160000||MC-10 Mk1
+W|3|AP Scalar Mk1|115000|400000||JP-7 Mk1
+W|3|AP Scalar Mk2|115000|800000||AP Scalar Mk1
+W|3|AP Scalar Mk3|115000|1600000||AP Scalar Mk2
+W|2|JP-7 Mk2|29000|320000||JP-7 Mk1
+W|3|JP-7 Mk3|29000|640000||JP-7 Mk2
+W|1|KL-545 Mk1|6000|25000||
+W|1|KL-545 Mk2|6000|50000||KL-545 Mk1
+W|2|KL-545 Mk3|6000|100000||KL-545 Mk2
+W|2|RC 5.56 Mk1|32000|200000||KL-545 Mk1
+W|3|SR Reaper Mk1|120000|400000||RC 5.56 Mk1
+W|3|SR Reaper Mk2|120000|800000||SR Reaper Mk1
+W|3|SR Reaper Mk3|120000|1600000||SR Reaper Mk2
+W|2|RC 5.56 Mk2|32000|400000||RC 5.56 Mk1
+W|3|RC 5.56 Mk3|32000|800000||RC 5.56 Mk2
+W|3|DRM-14 Mk1|103500|200000|950|RC 5.56 Mk1
+W|3|DRM-14 Mk2|103500|400000|975|DRM-14 Mk1
+W|3|DRM-14 Mk3|103500|800000|1000|DRM-14 Mk2
+W|2|STAR-H Mk1|27500|100000|180|KL-545 Mk1
+W|2|STAR-H Mk2|27500|200000|190|STAR-H Mk1
+W|3|STAR-H Mk3|27500|400000|200|STAR-H Mk2
+P|1|Grow Room|100000|150000||
+P|1|Grow Table|40000|30000||Grow Room
+P|1|Fan Lv.1|25000|100000||Grow Table
+P|2|Water Pump Lv.2|70000|200000||Fan Lv.1
+P|3|UV Lamp Lv.3|250000|500000||Water Pump Lv.2
+P|1|Chemical Laboratory|110000|160000||
+P|1|Lab Table|15000|10000||Chemical Laboratory
+P|2|Laboratory Scales|15000|15000|335|Lab Table
+P|1|Chemical Reactor Mk1|40000|20000||Chemical Laboratory
+P|2|Chemical Reactor Mk2|300000|150000||Chemical Reactor Mk1
+P|3|Chemical Reactor Mk3|700000|350000||Chemical Reactor Mk2
+P|1|Industrial Engine|20000|10000||Chemical Reactor Mk1
+P|2|Industrial Thermometer|120000|50000||Industrial Engine
+P|3|Chemical Converter|300000|150000||Industrial Thermometer
+P|1|Industrial Freezer Mk1|20000|15000||Chemical Reactor Mk1
+P|2|Industrial Freezer Mk2|90000|30000||Industrial Freezer Mk1
+P|3|Industrial Freezer Mk3|250000|100000||Industrial Freezer Mk2
+P|2|Improved Evaporator|100000|40000||Industrial Freezer Mk1
+P|3|Quality Refrigerant|250000|100000||Improved Evaporator
+E|0|Light Body Armor|4000|5000||
+E|0|Steel Plate (Uncommon)|1000|5000||Light Body Armor
+E|3|Steel Plate (Epic)|5000|100000|225|Steel Plate (Uncommon)
+E|1|Medium Body Armor|15000|15000||Light Body Armor
+E|2|Assault Body Armor|70000|250000||Medium Body Armor
+E|3|Heavy Body Armor|140000|500000||Assault Body Armor
+E|0|Sports Bag Lv.2|5000|5000||
+E|2|Sports Bag Lv.3|15000|35000||Sports Bag Lv.2
+E|3|Sports Bag Lv.4|40000|150000||Sports Bag Lv.3
+E|0|Versatile Pouch Lv.1|250|5000||
+E|1|Versatile Pouch Lv.2|1200|10000||Versatile Pouch Lv.1
+E|2|Versatile Pouch Lv.3|2700|25000||Versatile Pouch Lv.2
+E|3|Versatile Pouch Lv.4|12000|50000||Versatile Pouch Lv.3
+E|1|Flash Grenade|4000|25000||Versatile Pouch Lv.2
+E|2|Frag Grenade|14960|75000||Flash Grenade
+E|0|Painkillers (Standard)|500|10000||Versatile Pouch Lv.1
+E|2|Painkillers (Strong)|1600|20000||Painkillers (Standard)
+E|2|Injector Lv.1|2000|25000||Painkillers (Strong)
+E|3|Injector Lv.2|6000|50000||Injector Lv.1
+E|1|AFAK|500|5000|5|Painkillers (Standard)
+G|0|Action Camera|15000|5000||
+G|2|Cargo Sheet T2|30000|50000|410|Action Camera
+G|2|Action Camera T2|30000|35000||Action Camera
+G|3|Action Camera T3|50000|80000||Action Camera T2
+G|2|Code Tablet|20000|25000||Action Camera
+G|2|USB Hacking Tool|50000|50000||Code Tablet
+G|3|Deposit Box Keys|100000|100000||USB Hacking Tool
+G|0|Lockpick|99|5000||
+G|2|Master Key|55000|50000||Lockpick
+G|2|Mini Drill|18000|100000||Lockpick
+G|2|Police Radio (Cop Gear)|10000|25000|60|
+G|0|Bolt Cutter|3000|0||
+G|0|Bolt Cutter (Epic)|20000|0||
+`;
+
+  const ITEMS = RAW.trim().split("\n").map((line) => {
+    const [cat, tier, name, price, unlock, jail, requires] = line.split("|");
+    return { id: name, cat, tier: Number(tier), name, price: Number(price), unlock: Number(unlock), jail: jail ? Number(jail) : 0, requires: requires || null };
+  });
+  const itemById = new Map(ITEMS.map((item) => [item.id, item]));
+  const childrenOf = new Map();
+  ITEMS.forEach((item) => {
+    if (!item.requires) return;
+    if (!childrenOf.has(item.requires)) childrenOf.set(item.requires, []);
+    childrenOf.get(item.requires).push(item);
+  });
+
+  const TILE = 48, SLOT = 58, LEVEL = 72, CARD_HALF = 46, HUB_HALF_W = 71, HUB_HALF_H = 100, CARD_GAP = 150, LANE_GAP = 40;
+  const TIER = ["", "I", "II", "III"];
+  const FIELD_IDS = ["current", "today", "bank", "cash", "other", "rate", "base", "capState", "capDay", "capTotal"];
+  const STORAGE_KEY = "robrun-jail-v4";
+  const LANG_KEY = "robrun-lang";
+  const SUPPORT_URL = "";
+  const SVG_NS = "http://www.w3.org/2000/svg";
+  const byId = (id) => document.getElementById(id);
+  let lang = "en";
+  let money = null;
+  let yearsFmt = null;
+  const t = (key, ...args) => {
+    const value = I18N[lang][key];
+    return typeof value === "function" ? value(...args) : value;
+  };
+  const formatMoney = (value) => `$${money.format(value)}`;
+  const formatYears = (value) => t("years", yearsFmt.format(value));
+
+  const applyLanguage = (next) => {
+    lang = I18N[next] ? next : "en";
+    money = new Intl.NumberFormat(t("locale"), { maximumFractionDigits: 0 });
+    yearsFmt = new Intl.NumberFormat(t("locale"), { maximumFractionDigits: 2 });
+    document.documentElement.lang = lang;
+    document.title = t("pageTitle");
+    document.querySelectorAll("[data-i18n]").forEach((node) => { node.textContent = t(node.dataset.i18n); });
+    document.querySelectorAll("[data-i18n-aria]").forEach((node) => { node.setAttribute("aria-label", t(node.dataset.i18nAria)); });
+    const currentName = LANGUAGES.find(([code]) => code === lang)[1];
+    byId("langBtn").replaceChildren(flagSvg(lang), el("span", { lang, text: currentName }));
+    byId("langBtn").setAttribute("aria-label", `${t("language")}: ${currentName}`);
+    byId("langList").querySelectorAll("[role=option]").forEach((option) => option.setAttribute("aria-selected", String(option.dataset.code === lang)));
+    document.querySelectorAll("#extras .extra").forEach((row) => {
+      const [nameInput, priceInput] = row.querySelectorAll("input");
+      nameInput.placeholder = t("itemName");
+      nameInput.setAttribute("aria-label", t("itemNameLabel"));
+      priceInput.setAttribute("aria-label", t("itemValueLabel"));
+      const removeButton = row.querySelector("button");
+      removeButton.textContent = t("remove");
+      removeButton.setAttribute("aria-label", t("removeLabel"));
+    });
+    try { localStorage.setItem(LANG_KEY, lang); } catch { }
+  };
+
+  const initialLanguage = () => {
+    try {
+      const saved = localStorage.getItem(LANG_KEY);
+      if (saved && I18N[saved]) return saved;
+    } catch { }
+    const browser = (navigator.languages || [navigator.language || ""])
+      .map((code) => String(code).slice(0, 2).toLowerCase())
+      .find((code) => I18N[code]);
+    return browser || "en";
+  };
+
+  const state = { unlocked: new Set(), bought: new Map(), selected: null };
+  const view = { x: 0, y: 0, scale: 1 };
+  let layout = null;
+  let lastGain = 0;
+
+  const parseAmount = (raw) => {
+    const text = String(raw).trim().toLowerCase().replace(/[\s$]/g, "").replace(",", ".");
+    const match = text.match(/^(\d*\.?\d+)([kmb]?)$/);
+    if (!match) return 0;
+    const value = parseFloat(match[1]) * { "": 1, k: 1e3, m: 1e6, b: 1e9 }[match[2]];
+    return Number.isFinite(value) ? value : 0;
+  };
+
+  const el = (tag, props = {}, children = []) => {
+    const node = document.createElement(tag);
+    Object.entries(props).forEach(([key, value]) => {
+      if (key === "class") node.className = value;
+      else if (key === "text") node.textContent = value;
+      else if (key === "style") Object.assign(node.style, value);
+      else if (key.startsWith("on")) node.addEventListener(key.slice(2), value);
+      else node.setAttribute(key, value);
+    });
+    node.append(...children);
+    return node;
+  };
+
+  const svgEl = (tag, attrs) => {
+    const node = document.createElementNS(SVG_NS, tag);
+    Object.entries(attrs).forEach(([key, value]) => node.setAttribute(key, String(value)));
+    return node;
+  };
+
+  const sameCatKids = (item) => (childrenOf.get(item.id) || [])
+    .filter((child) => child.cat === item.cat);
+
+  const buildLayout = () => {
+    const positions = new Map();
+    const cats = [];
+    Object.entries(CATEGORIES).forEach(([id, cat]) => {
+      const roots = ITEMS.filter((item) => item.cat === id && (!item.requires || itemById.get(item.requires).cat !== id));
+      const local = new Map();
+      const measure = (item) => {
+        const kids = sameCatKids(item);
+        const width = kids.length ? kids.reduce((sum, kid) => sum + measure(kid), 0) : 1;
+        local.set(item.id, { width, kids });
+        return width;
+      };
+      const place = (item, left, depth) => {
+        const info = local.get(item.id);
+        if (!info.kids.length) info.x = (left + 0.5) * SLOT;
+        else {
+          let cursor = left;
+          info.kids.forEach((kid) => { place(kid, cursor, depth + 1); cursor += local.get(kid.id).width; });
+          info.x = (local.get(info.kids[0].id).x + local.get(info.kids[info.kids.length - 1].id).x) / 2;
+        }
+        info.y = cat.dir * (CARD_HALF + 58 + depth * LEVEL);
+      };
+      let total = 0;
+      roots.forEach((root) => { total += measure(root); });
+      let cursor = 0;
+      roots.forEach((root) => { place(root, cursor, 0); cursor += local.get(root.id).width; });
+      const first = local.get(roots[0].id).x;
+      const last = local.get(roots[roots.length - 1].id).x;
+      cats.push({ id, cat, roots, local, width: total * SLOT, center: (first + last) / 2 });
+    });
+
+    const placeSide = (side) => {
+      const lanes = { "-1": side > 0 ? HUB_HALF_W + LANE_GAP : -(HUB_HALF_W + LANE_GAP), "1": side > 0 ? HUB_HALF_W + LANE_GAP : -(HUB_HALF_W + LANE_GAP) };
+      let lastCard = 0;
+      cats.filter((c) => c.cat.side === side).sort((a, b) => a.cat.order - b.cat.order).forEach((c) => {
+        const lane = String(c.cat.dir);
+        let cx;
+        if (side > 0) {
+          cx = Math.max(lanes[lane] + c.center, lastCard + CARD_GAP);
+          lanes[lane] = cx - c.center + c.width + LANE_GAP;
+        } else {
+          cx = Math.min(lanes[lane] - (c.width - c.center), lastCard - CARD_GAP);
+          lanes[lane] = cx - c.center - LANE_GAP;
+        }
+        lastCard = cx;
+        c.cx = cx;
+      });
+    };
+    placeSide(1);
+    placeSide(-1);
+
+    let minX = -HUB_HALF_W, maxX = HUB_HALF_W, minY = -HUB_HALF_H, maxY = HUB_HALF_H;
+    cats.forEach((c) => {
+      c.local.forEach((info, id) => {
+        const x = c.cx - c.center + info.x;
+        positions.set(id, { x, y: info.y, kids: info.kids, cat: c });
+        minX = Math.min(minX, x); maxX = Math.max(maxX, x); minY = Math.min(minY, info.y); maxY = Math.max(maxY, info.y);
+      });
+    });
+    const pad = 90;
+    return { positions, cats, originX: -minX + pad, originY: -minY + pad, width: maxX - minX + pad * 2, height: maxY - minY + pad * 2, minX, maxX };
+  };
+
+  const unlockWithPrereqs = (id) => {
+    let current = itemById.get(id);
+    while (current) {
+      state.unlocked.add(current.id);
+      current = current.requires ? itemById.get(current.requires) : undefined;
+    }
+  };
+
+  const lockWithDependents = (id) => {
+    state.unlocked.delete(id);
+    state.bought.delete(id);
+    (childrenOf.get(id) || []).forEach((child) => lockWithDependents(child.id));
+  };
+
+  const refocus = (key) => {
+    const target = document.querySelector(`[data-key="${CSS.escape(key)}"]`);
+    if (target) target.focus({ preventScroll: true });
+  };
+
+  const toggleUnlock = (id) => {
+    if (state.unlocked.has(id)) lockWithDependents(id);
+    else unlockWithPrereqs(id);
+    render();
+    refocus("act-unlock");
+  };
+
+  const changeQty = (id, delta, key) => {
+    const next = (state.bought.get(id) || 0) + delta;
+    if (next <= 0) state.bought.delete(id);
+    else { state.bought.set(id, next); unlockWithPrereqs(id); }
+    render();
+    refocus(next <= 0 ? "act-buy" : key);
+  };
+
+  const select = (id) => {
+    state.selected = id;
+    render();
+    refocus(`tile:${id}`);
+  };
+
+  const drawConnector = (svg, px, py, parentHalf, dir, kids, isLit) => {
+    if (!kids.length) return;
+    const childY = kids[0].y;
+    const startY = py + dir * parentHalf;
+    const endY = childY - dir * TILE / 2;
+    const midY = (startY + endY) / 2;
+    const segments = [];
+    segments.push({ d: `M${px} ${startY}V${midY}`, lit: kids.some((k) => isLit(k.id)) });
+    kids.forEach((kid) => segments.push({ d: `M${px} ${midY}H${kid.x}V${endY}`, lit: isLit(kid.id) }));
+    segments.sort((a, b) => Number(a.lit) - Number(b.lit)).forEach((seg) => {
+      svg.append(svgEl("path", { d: seg.d, fill: "none", stroke: seg.lit ? "var(--lit)" : "var(--line)", "stroke-width": seg.lit ? 2 : 1.4, opacity: seg.lit ? 1 : 0.75 }));
+    });
+  };
+
+  const iconSvg = (name) => {
+    const svg = svgEl("svg", { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": 1.6, "stroke-linecap": "round", "stroke-linejoin": "round", "aria-hidden": "true" });
+    svg.append(svgEl("path", { d: ICONS[name] }));
+    return svg;
+  };
+
+  const renderWorld = (currentJail) => {
+    const world = byId("world");
+    const { positions, cats, originX, originY, width, height, minX, maxX } = layout;
+    world.style.width = `${width}px`;
+    world.style.height = `${height}px`;
+    world.replaceChildren();
+    const svg = svgEl("svg", { width, height, viewBox: `0 0 ${width} ${height}` });
+    const group = svgEl("g", { transform: `translate(${originX} ${originY})` });
+    svg.append(group);
+    group.append(svgEl("path", { d: `M${minX - 60} 0H${maxX + 60}`, stroke: "var(--line)", "stroke-width": 1.6, opacity: 0.9 }));
+    const isLit = (id) => state.unlocked.has(id);
+    const at = (id) => ({ ...positions.get(id), id });
+
+    cats.forEach((c) => {
+      drawConnector(group, c.cx, 0, CARD_HALF, c.cat.dir, c.roots.map((r) => at(r.id)), isLit);
+      positions.forEach((pos, id) => {
+        if (pos.cat !== c) return;
+        drawConnector(group, pos.x, pos.y, TILE / 2, c.cat.dir, pos.kids.map((k) => at(k.id)), isLit);
+      });
+    });
+    world.append(svg);
+
+    cats.forEach((c) => {
+      const picked = ITEMS.filter((item) => item.cat === c.id && (state.unlocked.has(item.id) || state.bought.has(item.id))).length;
+      const card = el("div", { class: "polaroid cat", style: { left: `${originX + c.cx - 35}px`, top: `${originY - CARD_HALF}px`, transform: `rotate(${c.cat.side * c.cat.order % 2 ? -1.5 : 1.2}deg)` } }, [
+        el("div", { class: "pic" }, [iconSvg(c.cat.icon)]),
+        el("div", { class: "cap", text: t(`cat${c.id}`) })
+      ]);
+      if (picked) card.append(el("span", { class: "badge", text: String(picked) }));
+      world.append(card);
+    });
+
+    const hub = el("div", { class: "polaroid hub", style: { left: `${originX - HUB_HALF_W}px`, top: `${originY - 78}px`, transform: "rotate(-1deg)" } }, [
+      el("div", { class: "pic" }, [el("div", { class: "num", text: `+${yearsFmt.format(lastGain)}` }), el("div", { class: "unit", text: t("hubUnit") })]),
+      el("div", { class: "cap", text: "Black Market" }),
+      el("div", { class: "desc", text: t("hubDesc") })
+    ]);
+    world.append(hub);
+
+    ITEMS.forEach((item) => {
+      const pos = positions.get(item.id);
+      const unlocked = state.unlocked.has(item.id);
+      const qty = state.bought.get(item.id) || 0;
+      const label = item.name.replace(/\s*\(([^)]*)\)/, " $1");
+      const tile = el("button", {
+        type: "button",
+        class: `tile${unlocked ? " on" : ""}${qty ? " bought" : ""}${state.selected === item.id ? " sel" : ""}`,
+        "data-key": `tile:${item.id}`,
+        title: item.name,
+        "aria-label": t("tileLabel", item.name, unlocked, qty),
+        style: { left: `${originX + pos.x - TILE / 2}px`, top: `${originY + pos.y - TILE / 2}px` },
+        onclick: () => select(item.id)
+      }, [el("span", { class: "lbl", text: label })]);
+      if (item.tier) tile.append(el("span", { class: "tier", text: TIER[item.tier] }));
+      if (item.jail) tile.append(el("span", { class: `jail${currentJail >= item.jail ? " ok" : ""}`, text: t("jailBadge", item.jail) }));
+      if (qty) tile.append(el("span", { class: "qty", text: `×${qty}` }));
+      if (item.requires && itemById.get(item.requires).cat !== item.cat) tile.append(el("span", { class: "ext" }));
+      world.append(tile);
+    });
+  };
+
+  const renderDetail = (currentJail) => {
+    const box = byId("detail");
+    box.replaceChildren();
+    const item = state.selected ? itemById.get(state.selected) : null;
+    if (!item) {
+      box.append(el("h2", { text: t("pickTile") }), el("div", { class: "meta", text: t("pickTileHint") }));
+      return;
+    }
+    const unlocked = state.unlocked.has(item.id);
+    const qty = state.bought.get(item.id) || 0;
+    const meta = [item.tier ? t("district", TIER[item.tier]) : t("noDistrict"), t(`cat${item.cat}`)];
+    if (item.requires) meta.push(t("requires", item.requires));
+    box.append(el("h2", { text: item.name }), el("div", { class: "meta", text: meta.join(" · ") }));
+    const dl = el("dl", {}, [
+      el("dt", { text: t("unlockCost") }), el("dd", { text: item.unlock ? formatMoney(item.unlock) : t("free") }),
+      el("dt", { text: t("price") }), el("dd", { text: formatMoney(item.price) })
+    ]);
+    if (item.jail) dl.append(el("dt", { text: t("jailNeeded") }), el("dd", { text: `${formatYears(item.jail)}${currentJail >= item.jail ? "" : t("missing")}` }));
+    box.append(dl);
+    const unlockBtn = el("button", { type: "button", class: "act", "data-key": "act-unlock", "aria-pressed": String(unlocked), text: unlocked ? t("unlocked") : t("unlock"), onclick: () => toggleUnlock(item.id) });
+    const buy = qty
+      ? el("div", { class: "stepper" }, [
+          el("button", { type: "button", "data-key": "act-minus", "aria-label": t("less"), text: "−", onclick: () => changeQty(item.id, -1, "act-minus") }),
+          el("span", { text: t("pieces", qty) }),
+          el("button", { type: "button", "data-key": "act-plus", "aria-label": t("more"), text: "+", onclick: () => changeQty(item.id, 1, "act-plus") })
+        ])
+      : el("button", { type: "button", class: "act", "data-key": "act-buy", text: t("buy"), onclick: () => changeQty(item.id, 1, "act-plus") });
+    box.append(el("div", { class: "acts" }, [unlockBtn, buy]));
+  };
+
+  const createExtraRow = (name = "", price = "") => {
+    const nameInput = el("input", { type: "text", placeholder: t("itemName"), "aria-label": t("itemNameLabel") });
+    const priceInput = el("input", { type: "text", inputmode: "decimal", placeholder: "$", "aria-label": t("itemValueLabel") });
+    nameInput.value = name;
+    priceInput.value = price;
+    const row = el("div", { class: "extra" }, [nameInput, priceInput,
+      el("button", { type: "button", class: "plain", text: t("remove"), "aria-label": t("removeLabel"), onclick: () => { row.remove(); render(); } })]);
+    nameInput.addEventListener("input", render);
+    priceInput.addEventListener("input", render);
+    byId("extras").append(row);
+    return nameInput;
+  };
+
+  const readExtras = () => Array.from(byId("extras").querySelectorAll(".extra")).map((row) => {
+    const [nameInput, priceInput] = row.querySelectorAll("input");
+    return { name: nameInput.value, price: priceInput.value, amount: parseAmount(priceInput.value) };
+  });
+
+  const save = (extras) => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        unlocked: [...state.unlocked], bought: [...state.bought],
+        fields: Object.fromEntries(FIELD_IDS.map((id) => [id, byId(id).value])),
+        lenny: byId("lenny").checked,
+        extras: extras.map(({ name, price }) => ({ name, price }))
+      }));
+    } catch { }
+  };
+
+  const restore = () => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const saved = JSON.parse(raw);
+      (saved.unlocked || []).forEach((id) => { if (itemById.has(id)) state.unlocked.add(id); });
+      (saved.bought || []).forEach(([id, qty]) => { if (itemById.has(id) && qty > 0) state.bought.set(id, qty); });
+      FIELD_IDS.forEach((id) => { if (saved.fields && id in saved.fields) byId(id).value = saved.fields[id]; });
+      byId("lenny").checked = Boolean(saved.lenny);
+      (saved.extras || []).forEach((row) => createExtraRow(row.name, row.price));
+    } catch { }
+  };
+
+  const renderPicked = (extras) => {
+    const list = byId("picked");
+    list.replaceChildren();
+    const rows = [];
+    ITEMS.forEach((item) => {
+      if (state.unlocked.has(item.id) && item.unlock) rows.push([t("pickedUnlock", item.name), item.unlock]);
+      const qty = state.bought.get(item.id);
+      if (qty) rows.push([t("pickedBought", item.name, qty), item.price * qty]);
+    });
+    extras.filter((row) => row.amount > 0).forEach((row) => rows.push([row.name || t("itemFallback"), row.amount]));
+    if (!rows.length) { list.append(el("li", { text: t("nothingYet") })); return; }
+    rows.forEach(([name, amount]) => list.append(el("li", {}, [el("span", { text: name }), el("span", { text: formatMoney(amount) })])));
+  };
+
+  function render() {
+    const current = parseAmount(byId("current").value);
+    const today = parseAmount(byId("today").value);
+    const bank = parseAmount(byId("bank").value);
+    const cash = parseAmount(byId("cash").value);
+    const otherField = parseAmount(byId("other").value);
+    const rate = parseAmount(byId("rate").value) || 500000;
+    const base = parseAmount(byId("base").value);
+    const capState = parseAmount(byId("capState").value);
+    const capDay = parseAmount(byId("capDay").value);
+    const capTotal = parseAmount(byId("capTotal").value);
+    const bonus = byId("lenny").checked ? 10 : 0;
+    const extras = readExtras();
+
+    const unlockValue = ITEMS.reduce((sum, item) => sum + (state.unlocked.has(item.id) ? item.unlock : 0), 0);
+    const buyValue = ITEMS.reduce((sum, item) => sum + item.price * (state.bought.get(item.id) || 0), 0);
+    const otherValue = otherField + extras.reduce((sum, row) => sum + row.amount, 0);
+    const moneyValue = bank + cash;
+    const value = unlockValue + buyValue + otherValue + moneyValue;
+
+    const raw = value > 0 ? base + Math.floor(value / rate) : 0;
+    const dayLeft = Math.max(0, capDay - today);
+    const totalLeft = Math.max(0, capTotal - current);
+    const fromRaid = Math.min(raw, capState, dayLeft);
+    const gain = Math.min(fromRaid + bonus, totalLeft);
+    lastGain = gain;
+    const fullCapValue = Math.max(0, capState - base) * rate;
+
+    byId("gain").textContent = `+${yearsFmt.format(gain)}`;
+    byId("sValue").textContent = formatMoney(value);
+    byId("sUnlock").textContent = formatMoney(unlockValue);
+    byId("sBuy").textContent = formatMoney(buyValue);
+    byId("sOther").textContent = formatMoney(otherValue);
+    byId("sMoney").textContent = formatMoney(moneyValue);
+    byId("sNew").textContent = formatYears(current + gain);
+    byId("sNext").textContent = raw >= capState ? t("limit") : formatMoney(rate - (value % rate));
+
+    const progress = capState > 0 ? Math.min(1, Math.min(raw, capState) / capState) : 0;
+    byId("capBar").style.width = `${progress * 100}%`;
+    byId("capLabel").textContent = t("capLabel", yearsFmt.format(Math.min(raw, capState)), yearsFmt.format(capState), formatMoney(fullCapValue));
+
+    const notes = [];
+    if (raw > capState) notes.push(t("noteOverCap", yearsFmt.format(raw - capState)));
+    if (Math.min(raw, capState) > dayLeft) notes.push(t("noteDaily", yearsFmt.format(dayLeft)));
+    if (fromRaid + bonus > totalLeft) notes.push(t("noteTotal", yearsFmt.format(capTotal)));
+    const jailBlocked = ITEMS.filter((item) => state.unlocked.has(item.id) && item.jail > current).map((item) => item.name);
+    if (jailBlocked.length) notes.push(t("noteJail", jailBlocked.join(", ")));
+    byId("note").textContent = notes.join(" ");
+    byId("note").hidden = !notes.length;
+
+    renderWorld(current);
+    renderDetail(current);
+    renderPicked(extras);
+    save(extras);
+  }
+
+  const applyView = () => {
+    byId("world").style.transform = `translate(${view.x}px, ${view.y}px) scale(${view.scale})`;
+  };
+
+  const centerView = () => {
+    const viewport = byId("viewport");
+    view.scale = viewport.clientWidth < 700 ? 0.7 : 1;
+    view.x = viewport.clientWidth / 2 - layout.originX * view.scale;
+    view.y = viewport.clientHeight / 2 - layout.originY * view.scale;
+    applyView();
+  };
+
+  const zoomAt = (factor, cx, cy) => {
+    const next = Math.min(2, Math.max(0.35, view.scale * factor));
+    const ratio = next / view.scale;
+    view.x = cx - (cx - view.x) * ratio;
+    view.y = cy - (cy - view.y) * ratio;
+    view.scale = next;
+    applyView();
+  };
+
+  const setupPanZoom = () => {
+    const viewport = byId("viewport");
+    let drag = null;
+    viewport.addEventListener("pointerdown", (event) => {
+      if (event.target.closest("button, input, .overlay")) return;
+      drag = { id: event.pointerId, x: event.clientX, y: event.clientY, vx: view.x, vy: view.y };
+      viewport.setPointerCapture(event.pointerId);
+      viewport.classList.add("dragging");
+    });
+    viewport.addEventListener("pointermove", (event) => {
+      if (!drag || drag.id !== event.pointerId) return;
+      view.x = drag.vx + event.clientX - drag.x;
+      view.y = drag.vy + event.clientY - drag.y;
+      applyView();
+    });
+    viewport.addEventListener("scroll", () => {
+      if (!viewport.scrollLeft && !viewport.scrollTop) return;
+      view.x -= viewport.scrollLeft;
+      view.y -= viewport.scrollTop;
+      viewport.scrollLeft = 0;
+      viewport.scrollTop = 0;
+      applyView();
+    });
+    const end = () => { drag = null; viewport.classList.remove("dragging"); };
+    viewport.addEventListener("pointerup", end);
+    viewport.addEventListener("pointercancel", end);
+    viewport.addEventListener("wheel", (event) => {
+      if (event.target.closest(".overlay")) return;
+      event.preventDefault();
+      const rect = viewport.getBoundingClientRect();
+      zoomAt(event.deltaY < 0 ? 1.12 : 1 / 1.12, event.clientX - rect.left, event.clientY - rect.top);
+    }, { passive: false });
+    const middle = () => [viewport.clientWidth / 2, viewport.clientHeight / 2];
+    byId("zoomIn").addEventListener("click", () => zoomAt(1.2, ...middle()));
+    byId("zoomOut").addEventListener("click", () => zoomAt(1 / 1.2, ...middle()));
+    byId("center").addEventListener("click", centerView);
+  };
+
+  const setupLanguagePicker = () => {
+    const button = byId("langBtn");
+    const list = byId("langList");
+    const options = LANGUAGES.map(([code, name]) => {
+      const option = el("li", { role: "option", id: `lang-${code}`, tabindex: "-1", lang: code, "data-code": code }, [flagSvg(code), el("span", { text: name })]);
+      option.addEventListener("click", () => choose(code));
+      list.append(option);
+      return option;
+    });
+
+    const close = (refocus) => {
+      list.hidden = true;
+      button.setAttribute("aria-expanded", "false");
+      if (refocus) button.focus();
+    };
+    const open = () => {
+      list.hidden = false;
+      button.setAttribute("aria-expanded", "true");
+      (options.find((option) => option.dataset.code === lang) || options[0]).focus();
+    };
+    const choose = (code) => {
+      close(true);
+      if (code === lang) return;
+      applyLanguage(code);
+      render();
+    };
+
+    button.addEventListener("click", () => (list.hidden ? open() : close(false)));
+    button.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowDown" || event.key === "ArrowUp") { event.preventDefault(); open(); }
+    });
+    list.addEventListener("keydown", (event) => {
+      const index = options.indexOf(document.activeElement);
+      const moves = { ArrowDown: index + 1, ArrowUp: index - 1, Home: 0, End: options.length - 1 };
+      if (event.key in moves) {
+        event.preventDefault();
+        options[(moves[event.key] + options.length) % options.length].focus();
+      } else if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        if (index >= 0) choose(options[index].dataset.code);
+      } else if (event.key === "Escape") {
+        event.preventDefault();
+        close(true);
+      } else if (event.key === "Tab") {
+        close(false);
+      }
+    });
+    document.addEventListener("pointerdown", (event) => {
+      if (!list.hidden && !event.target.closest("#langPick")) close(false);
+    });
+  };
+
+  layout = buildLayout();
+  if (SUPPORT_URL.startsWith("https://")) {
+    byId("supportLink").href = SUPPORT_URL;
+    byId("supportRow").hidden = false;
+  }
+  setupLanguagePicker();
+  applyLanguage(initialLanguage());
+  restore();
+  FIELD_IDS.forEach((id) => byId(id).addEventListener("input", render));
+  byId("lenny").addEventListener("change", render);
+  byId("addExtra").addEventListener("click", () => { createExtraRow().focus(); });
+  byId("reset").addEventListener("click", () => { state.unlocked.clear(); state.bought.clear(); render(); });
+  setupPanZoom();
+  render();
+  centerView();
+})();
+</script>
+</body>
+</html>
