@@ -159,6 +159,9 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
 .fb svg{width:15px;height:15px;flex-shrink:0;color:var(--muted)}
 .fb:hover{border-color:var(--accent)}
 .fb:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.fblink{grid-column:1/-1;justify-self:center;margin-top:2px;font-size:12px;color:var(--muted);text-decoration:underline;text-underline-offset:2px}
+.fblink:hover{color:var(--accent)}
+.fblink:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 @media (max-width:900px){
   body{overflow:auto}
   .app{flex-direction:column;height:auto}
@@ -232,6 +235,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
     <div class="feedback" id="feedbackRow" hidden>
       <a id="bugLink" class="fb" rel="noopener noreferrer" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 9a4 4 0 0 1 8 0v6a4 4 0 0 1-8 0z M12 11v8 M8 12H4 M20 12h-4 M8 16l-3 2 M16 16l3 2 M8 8L5 6 M16 8l3-2"/></svg><span data-i18n="reportBug"></span></a>
       <a id="ideaLink" class="fb" rel="noopener noreferrer" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6 M10 21h4 M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3z"/></svg><span data-i18n="suggestFeature"></span></a>
+      <a id="translationLink" class="fblink" rel="noopener noreferrer" target="_blank" data-i18n="reportTranslation" hidden></a>
     </div>
 
     <details>
@@ -329,6 +333,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       supportHint: "Free, no ads. A coffee helps keep the prices up to date.",
       reportBug: "Report a bug",
       suggestFeature: "Suggest a feature",
+      reportTranslation: "Report a translation issue",
       catD: "Documents", catV: "Vehicles", catC: "Construction", catF: "Furniture",
       catW: "Weapons", catP: "Production", catE: "Equipment", catG: "Gadgets",
       hubUnit: "years per raid",
@@ -417,6 +422,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       supportHint: "Zadarmo a bez reklám. Káva pomôže udržiavať ceny aktuálne.",
       reportBug: "Nahlásiť chybu",
       suggestFeature: "Navrhnúť funkciu",
+      reportTranslation: "Nahlásiť chybu v preklade",
       catD: "Dokumenty", catV: "Vozidlá", catC: "Stavby", catF: "Nábytok",
       catW: "Zbrane", catP: "Produkcia", catE: "Výbava", catG: "Gadgety",
       hubUnit: "rokov za raid",
@@ -505,6 +511,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       supportHint: "Бесплатно и без рекламы. Кофе помогает поддерживать цены актуальными.",
       reportBug: "Сообщить об ошибке",
       suggestFeature: "Предложить идею",
+      reportTranslation: "Сообщить об ошибке перевода",
       catD: "Документы", catV: "Транспорт", catC: "Стройка", catF: "Мебель",
       catW: "Оружие", catP: "Производство", catE: "Снаряжение", catG: "Гаджеты",
       hubUnit: "лет за рейд",
@@ -593,6 +600,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       supportHint: "Gratis y sin anuncios. Un café ayuda a mantener los precios al día.",
       reportBug: "Informar de un error",
       suggestFeature: "Sugerir una función",
+      reportTranslation: "Informar de un error de traducción",
       catD: "Documentos", catV: "Vehículos", catC: "Construcción", catF: "Muebles",
       catW: "Armas", catP: "Producción", catE: "Equipo", catG: "Gadgets",
       hubUnit: "años por raid",
@@ -681,6 +689,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       supportHint: "Grátis e sem anúncios. Um café ajuda a manter os preços atualizados.",
       reportBug: "Relatar um erro",
       suggestFeature: "Sugerir um recurso",
+      reportTranslation: "Relatar um erro de tradução",
       catD: "Documentos", catV: "Veículos", catC: "Construção", catF: "Móveis",
       catW: "Armas", catP: "Produção", catE: "Equipamento", catG: "Gadgets",
       hubUnit: "anos por raid",
@@ -769,6 +778,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       supportHint: "Kostenlos und ohne Werbung. Ein Kaffee hilft, die Preise aktuell zu halten.",
       reportBug: "Fehler melden",
       suggestFeature: "Funktion vorschlagen",
+      reportTranslation: "Übersetzungsfehler melden",
       catD: "Dokumente", catV: "Fahrzeuge", catC: "Bau", catF: "Möbel",
       catW: "Waffen", catP: "Produktion", catE: "Ausrüstung", catG: "Gadgets",
       hubUnit: "Jahre pro Raid",
@@ -857,6 +867,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       supportHint: "Gratuit et sans publicité. Un café aide à garder les prix à jour.",
       reportBug: "Signaler un bug",
       suggestFeature: "Proposer une idée",
+      reportTranslation: "Signaler une erreur de traduction",
       catD: "Documents", catV: "Véhicules", catC: "Construction", catF: "Mobilier",
       catW: "Armes", catP: "Production", catE: "Équipement", catG: "Gadgets",
       hubUnit: "ans par raid",
@@ -945,6 +956,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       supportHint: "免费且无广告。请我喝杯咖啡，帮助保持价格最新。",
       reportBug: "报告问题",
       suggestFeature: "功能建议",
+      reportTranslation: "报告翻译问题",
       catD: "文件", catV: "载具", catC: "建筑", catF: "家具",
       catW: "武器", catP: "生产", catE: "装备", catG: "小工具",
       hubUnit: "年 / 每次抢劫",
@@ -1256,13 +1268,16 @@ G|0|Bolt Cutter (Epic)|20000|0||
   const PRICES_CHECKED = "2026-11-20";
   const FEEDBACK_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScLpY6e9iu8rGOJBG-EOl0wsKRyuzonXnHPzyZgfgWAE6aIqg/viewform";
   const FEEDBACK_TYPE_ENTRY = "1274521845";
-  const FEEDBACK_TYPES = { bug: "Bug", feature: "Feature idea" };
+  const FEEDBACK_DESCRIPTION_ENTRY = "610068089";
+  const FEEDBACK_TYPES = { bug: "Bug", feature: "Feature idea", translation: "Translation issue" };
+  const feedbackEnabled = FEEDBACK_FORM_URL.startsWith("https://");
 
-  const feedbackUrl = (type) => {
+  const feedbackUrl = (type, description = "") => {
     const url = new URL(FEEDBACK_FORM_URL);
     if (FEEDBACK_TYPE_ENTRY) {
       url.searchParams.set("usp", "pp_url");
       url.searchParams.set(`entry.${FEEDBACK_TYPE_ENTRY}`, FEEDBACK_TYPES[type]);
+      if (description && FEEDBACK_DESCRIPTION_ENTRY) url.searchParams.set(`entry.${FEEDBACK_DESCRIPTION_ENTRY}`, description);
     }
     return url.href;
   };
@@ -1291,6 +1306,9 @@ G|0|Bolt Cutter (Epic)|20000|0||
     const currentName = LANGUAGES.find(([code]) => code === lang)[1];
     byId("langBtn").replaceChildren(flagSvg(lang), el("span", { lang, text: currentName }));
     byId("langBtn").setAttribute("aria-label", `${t("language")}: ${currentName}`);
+    const translationLink = byId("translationLink");
+    translationLink.hidden = !feedbackEnabled || lang === "en";
+    if (!translationLink.hidden) translationLink.href = feedbackUrl("translation", `Language: ${currentName}\n\n`);
     byId("langList").querySelectorAll("[role=option]").forEach((option) => option.setAttribute("aria-selected", String(option.dataset.code === lang)));
     document.querySelectorAll("#extras .extra").forEach((row) => {
       const [nameInput, priceInput] = row.querySelectorAll("input");
@@ -1831,7 +1849,7 @@ G|0|Bolt Cutter (Epic)|20000|0||
     byId("supportLink").href = SUPPORT_URL;
     byId("supportRow").hidden = false;
   }
-  if (FEEDBACK_FORM_URL.startsWith("https://")) {
+  if (feedbackEnabled) {
     byId("bugLink").href = feedbackUrl("bug");
     byId("ideaLink").href = feedbackUrl("feature");
     byId("feedbackRow").hidden = false;
