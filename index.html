@@ -103,8 +103,12 @@ body{background:var(--board);color:var(--text);font:14px/1.45 Barlow,system-ui,s
 .langlist li[aria-selected=true]{color:var(--accent)}
 .flag{display:block;width:20px;height:14px;flex-shrink:0;box-shadow:0 0 0 1px rgba(0,0,0,.55)}
 .titlebox p{margin:0;color:var(--muted);font-size:12.5px}
-.legend{display:flex;gap:12px;margin-top:8px;font-size:11.5px;color:var(--muted);flex-wrap:wrap}
-.legend i{display:inline-block;width:11px;height:11px;margin-right:5px;vertical-align:-1px;border:1px solid #1f1f1f}
+.legend{display:flex;gap:6px 16px;margin-top:10px;font-size:12.5px;font-weight:600;color:var(--text);flex-wrap:wrap}
+.legend > span{display:inline-flex;align-items:center;gap:7px}
+.legend i{display:inline-block;width:18px;height:18px;flex-shrink:0;border:1px solid #8a8a8a}
+.legend .sw-locked{background:var(--tile)}
+.legend .sw-unlocked{background:var(--tile-on);border-color:#d8d8d8}
+.legend .sw-bought{background:var(--tile-on);border-color:#d8d8d8;box-shadow:inset 0 -5px 0 var(--accent)}
 .zoom{left:16px;bottom:16px;display:flex;gap:6px}
 .zoom button,.plain{font:600 13px/1 Barlow,sans-serif;background:var(--panel);color:var(--text);border:1px solid var(--rule);padding:8px 11px;cursor:pointer}
 .zoom button:focus-visible,.plain:focus-visible,.act:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -196,9 +200,9 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       </div>
       <p data-i18n="intro"></p>
       <div class="legend" aria-hidden="true">
-        <span><i style="background:#2b2b2b"></i><span data-i18n="legendLocked"></span></span>
-        <span><i style="background:#b9b9b9"></i><span data-i18n="legendUnlocked"></span></span>
-        <span><i style="background:#b9b9b9;box-shadow:inset 0 -3px 0 #f0b45a"></i><span data-i18n="legendBought"></span></span>
+        <span><i class="sw-locked"></i><span data-i18n="legendLocked"></span></span>
+        <span><i class="sw-unlocked"></i><span data-i18n="legendUnlocked"></span></span>
+        <span><i class="sw-bought"></i><span data-i18n="legendBought"></span></span>
       </div>
       <form class="search" id="searchForm" role="search">
         <input type="search" id="search" list="itemNames" autocomplete="off" data-i18n-aria="search">
