@@ -162,6 +162,11 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
 .fblink{grid-column:1/-1;justify-self:center;margin-top:2px;font-size:12px;color:var(--muted);text-decoration:underline;text-underline-offset:2px}
 .fblink:hover{color:var(--accent)}
 .fblink:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.share{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;margin-top:12px}
+.share svg{width:15px;height:15px;flex-shrink:0;color:var(--muted)}
+.share:hover{border-color:var(--accent)}
+.toast{position:fixed;left:50%;bottom:20px;z-index:20;transform:translateX(-50%);display:flex;align-items:center;gap:14px;max-width:calc(100vw - 32px);padding:10px 14px;background:#1c1c1c;color:var(--text);border:1px solid var(--rule);border-left:3px solid var(--accent);box-shadow:0 8px 20px rgba(0,0,0,.5);font-size:13px}
+.toast[hidden]{display:none}
 @media (max-width:900px){
   body{overflow:auto}
   .app{flex-direction:column;height:auto}
@@ -202,6 +207,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
     </div>
   </div>
 
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden><span id="toastText"></span></div>
   <aside class="side" aria-live="polite">
     <h2 data-i18n="resultTitle"></h2>
     <div class="big" id="gain">+0</div>
@@ -218,6 +224,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
     <div class="bar" aria-hidden="true"><span id="capBar"></span></div>
     <div class="bar-label" id="capLabel"></div>
     <div class="note" id="note" hidden></div>
+    <button type="button" class="plain share" id="shareBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1 M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><span data-i18n="shareBuild"></span></button>
 
     <div class="fields">
       <div><label for="current" data-i18n="fieldCurrent"></label><input id="current" type="text" inputmode="decimal" value="0"></div>
@@ -334,6 +341,11 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       reportBug: "Report a bug",
       suggestFeature: "Suggest a feature",
       reportTranslation: "Report a translation issue",
+      shareBuild: "Copy link to this build",
+      shareCopied: "Link copied. Anyone who opens it will see this build.",
+      shareManual: "Copy the link from the address bar.",
+      shareLoaded: "Shared build loaded.",
+      shareInvalid: "This share link could not be read.",
       catD: "Documents", catV: "Vehicles", catC: "Construction", catF: "Furniture",
       catW: "Weapons", catP: "Production", catE: "Equipment", catG: "Gadgets",
       hubUnit: "years per raid",
@@ -423,6 +435,11 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       reportBug: "Nahlásiť chybu",
       suggestFeature: "Navrhnúť funkciu",
       reportTranslation: "Nahlásiť chybu v preklade",
+      shareBuild: "Kopírovať odkaz na tento build",
+      shareCopied: "Odkaz je skopírovaný. Kto ho otvorí, uvidí tento build.",
+      shareManual: "Skopíruj odkaz z panela s adresou.",
+      shareLoaded: "Načítaný zdieľaný build.",
+      shareInvalid: "Tento odkaz sa nedá načítať.",
       catD: "Dokumenty", catV: "Vozidlá", catC: "Stavby", catF: "Nábytok",
       catW: "Zbrane", catP: "Produkcia", catE: "Výbava", catG: "Gadgety",
       hubUnit: "rokov za raid",
@@ -512,6 +529,11 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       reportBug: "Сообщить об ошибке",
       suggestFeature: "Предложить идею",
       reportTranslation: "Сообщить об ошибке перевода",
+      shareBuild: "Скопировать ссылку на сборку",
+      shareCopied: "Ссылка скопирована. Кто её откроет, увидит эту сборку.",
+      shareManual: "Скопируйте ссылку из адресной строки.",
+      shareLoaded: "Загружена общая сборка.",
+      shareInvalid: "Не удалось прочитать эту ссылку.",
       catD: "Документы", catV: "Транспорт", catC: "Стройка", catF: "Мебель",
       catW: "Оружие", catP: "Производство", catE: "Снаряжение", catG: "Гаджеты",
       hubUnit: "лет за рейд",
@@ -601,6 +623,11 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       reportBug: "Informar de un error",
       suggestFeature: "Sugerir una función",
       reportTranslation: "Informar de un error de traducción",
+      shareBuild: "Copiar enlace a esta build",
+      shareCopied: "Enlace copiado. Quien lo abra verá esta build.",
+      shareManual: "Copia el enlace de la barra de direcciones.",
+      shareLoaded: "Build compartida cargada.",
+      shareInvalid: "No se pudo leer este enlace.",
       catD: "Documentos", catV: "Vehículos", catC: "Construcción", catF: "Muebles",
       catW: "Armas", catP: "Producción", catE: "Equipo", catG: "Gadgets",
       hubUnit: "años por raid",
@@ -690,6 +717,11 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       reportBug: "Relatar um erro",
       suggestFeature: "Sugerir um recurso",
       reportTranslation: "Relatar um erro de tradução",
+      shareBuild: "Copiar link desta build",
+      shareCopied: "Link copiado. Quem abrir verá esta build.",
+      shareManual: "Copie o link da barra de endereço.",
+      shareLoaded: "Build compartilhada carregada.",
+      shareInvalid: "Não foi possível ler este link.",
       catD: "Documentos", catV: "Veículos", catC: "Construção", catF: "Móveis",
       catW: "Armas", catP: "Produção", catE: "Equipamento", catG: "Gadgets",
       hubUnit: "anos por raid",
@@ -779,6 +811,11 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       reportBug: "Fehler melden",
       suggestFeature: "Funktion vorschlagen",
       reportTranslation: "Übersetzungsfehler melden",
+      shareBuild: "Link zu diesem Build kopieren",
+      shareCopied: "Link kopiert. Wer ihn öffnet, sieht diesen Build.",
+      shareManual: "Kopiere den Link aus der Adressleiste.",
+      shareLoaded: "Geteilter Build geladen.",
+      shareInvalid: "Dieser Link konnte nicht gelesen werden.",
       catD: "Dokumente", catV: "Fahrzeuge", catC: "Bau", catF: "Möbel",
       catW: "Waffen", catP: "Produktion", catE: "Ausrüstung", catG: "Gadgets",
       hubUnit: "Jahre pro Raid",
@@ -868,6 +905,11 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       reportBug: "Signaler un bug",
       suggestFeature: "Proposer une idée",
       reportTranslation: "Signaler une erreur de traduction",
+      shareBuild: "Copier le lien de ce build",
+      shareCopied: "Lien copié. Toute personne qui l'ouvre verra ce build.",
+      shareManual: "Copiez le lien depuis la barre d'adresse.",
+      shareLoaded: "Build partagé chargé.",
+      shareInvalid: "Impossible de lire ce lien.",
       catD: "Documents", catV: "Véhicules", catC: "Construction", catF: "Mobilier",
       catW: "Armes", catP: "Production", catE: "Équipement", catG: "Gadgets",
       hubUnit: "ans par raid",
@@ -957,6 +999,11 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       reportBug: "报告问题",
       suggestFeature: "功能建议",
       reportTranslation: "报告翻译问题",
+      shareBuild: "复制此配置的链接",
+      shareCopied: "链接已复制。打开链接的人会看到此配置。",
+      shareManual: "请从地址栏复制链接。",
+      shareLoaded: "已加载分享的配置。",
+      shareInvalid: "无法读取此分享链接。",
       catD: "文件", catV: "载具", catC: "建筑", catF: "家具",
       catW: "武器", catP: "生产", catE: "装备", catG: "小工具",
       hubUnit: "年 / 每次抢劫",
@@ -1266,6 +1313,11 @@ G|0|Bolt Cutter (Epic)|20000|0||
   const LANG_KEY = "robrun-lang";
   const SUPPORT_URL = "https://ko-fi.com/modko";
   const PRICES_CHECKED = "2026-11-20";
+  const SHARE_PACKED = "#b=";
+  const SHARE_PLAIN = "#j=";
+  const SHARE_MAX_QTY = 999;
+  const SHARE_MAX_TEXT = 100;
+  const TOAST_MS = 5000;
   const FEEDBACK_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScLpY6e9iu8rGOJBG-EOl0wsKRyuzonXnHPzyZgfgWAE6aIqg/viewform";
   const FEEDBACK_TYPE_ENTRY = "1274521845";
   const FEEDBACK_DESCRIPTION_ENTRY = "610068089";
@@ -1431,12 +1483,18 @@ G|0|Bolt Cutter (Epic)|20000|0||
     return { positions, cats, originX: -minX + pad, originY: -minY + pad, width: maxX - minX + pad * 2, height: maxY - minY + pad * 2, minX, maxX };
   };
 
-  const unlockWithPrereqs = (id) => {
+  const prereqChain = (id) => {
+    const chain = [];
     let current = itemById.get(id);
     while (current) {
-      state.unlocked.add(current.id);
+      chain.push(current.id);
       current = current.requires ? itemById.get(current.requires) : undefined;
     }
+    return chain;
+  };
+
+  const unlockWithPrereqs = (id) => {
+    prereqChain(id).forEach((chainId) => state.unlocked.add(chainId));
   };
 
   const lockWithDependents = (id) => {
@@ -1619,28 +1677,112 @@ G|0|Bolt Cutter (Epic)|20000|0||
     return { name: nameInput.value, price: priceInput.value, amount: parseAmount(priceInput.value) };
   });
 
-  const save = (extras) => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({
-        unlocked: [...state.unlocked], bought: [...state.bought],
-        fields: Object.fromEntries(FIELD_IDS.map((id) => [id, byId(id).value])),
-        lenny: byId("lenny").checked,
-        extras: extras.map(({ name, price }) => ({ name, price }))
-      }));
-    } catch { }
+  const snapshot = () => ({
+    unlocked: [...state.unlocked], bought: [...state.bought],
+    fields: Object.fromEntries(FIELD_IDS.map((id) => [id, byId(id).value])),
+    lenny: byId("lenny").checked,
+    extras: readExtras().map(({ name, price }) => ({ name, price }))
+  });
+
+  const applySnapshot = (saved) => {
+    state.unlocked.clear();
+    state.bought.clear();
+    (saved.unlocked || []).forEach((id) => { if (itemById.has(id)) state.unlocked.add(id); });
+    (saved.bought || []).forEach(([id, qty]) => { if (itemById.has(id) && Number.isInteger(qty) && qty > 0) state.bought.set(id, qty); });
+    FIELD_IDS.forEach((id) => {
+      const input = byId(id);
+      input.value = saved.fields && id in saved.fields ? String(saved.fields[id]) : input.defaultValue;
+    });
+    byId("lenny").checked = Boolean(saved.lenny);
+    byId("extras").replaceChildren();
+    (saved.extras || []).forEach((row) => createExtraRow(String(row.name ?? ""), String(row.price ?? "")));
+  };
+
+  const save = () => {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot())); } catch { }
   };
 
   const restore = () => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return;
-      const saved = JSON.parse(raw);
-      (saved.unlocked || []).forEach((id) => { if (itemById.has(id)) state.unlocked.add(id); });
-      (saved.bought || []).forEach(([id, qty]) => { if (itemById.has(id) && qty > 0) state.bought.set(id, qty); });
-      FIELD_IDS.forEach((id) => { if (saved.fields && id in saved.fields) byId(id).value = saved.fields[id]; });
-      byId("lenny").checked = Boolean(saved.lenny);
-      (saved.extras || []).forEach((row) => createExtraRow(row.name, row.price));
+      if (raw) applySnapshot(JSON.parse(raw));
     } catch { }
+  };
+
+  const toBase64Url = (bytes) => btoa(Array.from(bytes, (byte) => String.fromCharCode(byte)).join(""))
+    .replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  const fromBase64Url = (text) => Uint8Array.from(atob(text.replace(/-/g, "+").replace(/_/g, "/")), (char) => char.charCodeAt(0));
+  const pipeBytes = async (bytes, transform) => new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(transform)).arrayBuffer());
+  const canCompress = typeof CompressionStream === "function" && typeof DecompressionStream === "function";
+
+  const sharePayload = () => {
+    const leaves = [...state.unlocked].filter((id) => !state.bought.has(id)
+      && !(childrenOf.get(id) || []).some((child) => state.unlocked.has(child.id)));
+    const fields = Object.fromEntries(FIELD_IDS
+      .filter((id) => byId(id).value !== byId(id).defaultValue)
+      .map((id) => [id, byId(id).value]));
+    const extras = readExtras().filter((row) => row.name || row.price).map(({ name, price }) => [name, price]);
+    return { u: leaves, b: [...state.bought], f: fields, l: byId("lenny").checked ? 1 : 0, e: extras };
+  };
+
+  const snapshotFromPayload = (payload) => {
+    const ids = [...(payload.u || []), ...(payload.b || []).map(([id]) => id)].filter((id) => itemById.has(id));
+    return {
+      unlocked: [...new Set(ids.flatMap(prereqChain))],
+      bought: (payload.b || []).map(([id, qty]) => [id, Math.min(Number(qty), SHARE_MAX_QTY)]),
+      fields: Object.fromEntries(Object.entries(payload.f || {}).filter(([id]) => FIELD_IDS.includes(id))),
+      lenny: payload.l === 1,
+      extras: (payload.e || []).map(([name, price]) => ({ name: String(name).slice(0, SHARE_MAX_TEXT), price: String(price).slice(0, SHARE_MAX_TEXT) }))
+    };
+  };
+
+  const encodeShare = async () => {
+    const json = new TextEncoder().encode(JSON.stringify(sharePayload()));
+    if (!canCompress) return `${SHARE_PLAIN}${toBase64Url(json)}`;
+    return `${SHARE_PACKED}${toBase64Url(await pipeBytes(json, new CompressionStream("deflate-raw")))}`;
+  };
+
+  const decodeShare = async (hash) => {
+    const packed = hash.startsWith(SHARE_PACKED);
+    const bytes = fromBase64Url(hash.slice((packed ? SHARE_PACKED : SHARE_PLAIN).length));
+    const json = packed ? await pipeBytes(bytes, new DecompressionStream("deflate-raw")) : bytes;
+    return snapshotFromPayload(JSON.parse(new TextDecoder().decode(json)));
+  };
+
+  const isShareHash = (hash) => hash.startsWith(SHARE_PACKED) || hash.startsWith(SHARE_PLAIN);
+
+  let toastTimer = 0;
+  const showToast = (message) => {
+    byId("toastText").textContent = message;
+    byId("toast").hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { byId("toast").hidden = true; }, TOAST_MS);
+  };
+
+  const copyShareLink = async () => {
+    const url = new URL(location.href);
+    url.hash = await encodeShare();
+    try {
+      await navigator.clipboard.writeText(url.href);
+      showToast(t("shareCopied"));
+    } catch {
+      history.replaceState(null, "", url.href);
+      showToast(t("shareManual"));
+    }
+  };
+
+  const loadSharedFromHash = async () => {
+    if (!isShareHash(location.hash)) return;
+    const hash = location.hash;
+    history.replaceState(null, "", location.pathname + location.search);
+    try {
+      applySnapshot(await decodeShare(hash));
+      state.selected = null;
+      render();
+      showToast(t("shareLoaded"));
+    } catch {
+      showToast(t("shareInvalid"));
+    }
   };
 
   const renderPicked = (extras) => {
@@ -1710,7 +1852,7 @@ G|0|Bolt Cutter (Epic)|20000|0||
     renderWorld(current);
     renderDetail(current);
     renderPicked(extras);
-    save(extras);
+    save();
   }
 
   const applyView = () => {
@@ -1861,9 +2003,12 @@ G|0|Bolt Cutter (Epic)|20000|0||
   byId("lenny").addEventListener("change", render);
   byId("addExtra").addEventListener("click", () => { createExtraRow().focus(); });
   byId("reset").addEventListener("click", () => { state.unlocked.clear(); state.bought.clear(); render(); });
+  byId("shareBtn").addEventListener("click", copyShareLink);
+  window.addEventListener("hashchange", loadSharedFromHash);
   setupPanZoom();
   render();
   centerView();
+  loadSharedFromHash();
   document.fonts.ready.then(() => {
     labelSizes.clear();
     render();
