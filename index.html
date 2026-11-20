@@ -57,6 +57,9 @@ body{background:var(--board);color:var(--text);font:14px/1.45 Barlow,system-ui,s
 .viewport{position:relative;flex:1;overflow:hidden;cursor:grab;touch-action:none;
   background-color:var(--board);background-image:radial-gradient(var(--board-dot) 1px,transparent 1px);background-size:22px 22px}
 .viewport.dragging{cursor:grabbing}
+.viewport{-webkit-user-select:none;user-select:none}
+.viewport .overlay{-webkit-user-select:text;user-select:text}
+.world svg,.world .polaroid{-webkit-user-drag:none}
 .world{position:absolute;left:0;top:0;transform-origin:0 0}
 .world svg{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 .tile{position:absolute;width:48px;height:48px;padding:0;border:1px solid var(--tile-border);background:var(--tile);color:var(--tile-text);
@@ -1191,6 +1194,7 @@ G|0|Bolt Cutter (Epic)|20000|0||
     childrenOf.get(item.requires).push(item);
   });
 
+  const DRAG_THRESHOLD = 4;
   const TILE = 48, SLOT = 58, LEVEL = 72, CARD_HALF = 46, HUB_HALF_W = 71, HUB_HALF_H = 100, CARD_GAP = 150, LANE_GAP = 40;
   const TIER = ["", "I", "II", "III"];
   const LABEL_MAX_SIZE = 8.5, LABEL_MIN_SIZE = 6;
@@ -1649,18 +1653,31 @@ G|0|Bolt Cutter (Epic)|20000|0||
   const setupPanZoom = () => {
     const viewport = byId("viewport");
     let drag = null;
+    let suppressClick = false;
     viewport.addEventListener("pointerdown", (event) => {
-      if (event.target.closest("button, input, .overlay")) return;
-      drag = { id: event.pointerId, x: event.clientX, y: event.clientY, vx: view.x, vy: view.y };
-      viewport.setPointerCapture(event.pointerId);
-      viewport.classList.add("dragging");
+      if (event.button !== 0 || event.target.closest("input, .overlay")) return;
+      drag = { id: event.pointerId, x: event.clientX, y: event.clientY, vx: view.x, vy: view.y, moved: false };
     });
     viewport.addEventListener("pointermove", (event) => {
       if (!drag || drag.id !== event.pointerId) return;
-      view.x = drag.vx + event.clientX - drag.x;
-      view.y = drag.vy + event.clientY - drag.y;
+      const dx = event.clientX - drag.x;
+      const dy = event.clientY - drag.y;
+      if (!drag.moved) {
+        if (Math.hypot(dx, dy) < DRAG_THRESHOLD) return;
+        drag.moved = true;
+        viewport.setPointerCapture(event.pointerId);
+        viewport.classList.add("dragging");
+      }
+      view.x = drag.vx + dx;
+      view.y = drag.vy + dy;
       applyView();
     });
+    viewport.addEventListener("click", (event) => {
+      if (!suppressClick) return;
+      suppressClick = false;
+      event.stopPropagation();
+      event.preventDefault();
+    }, true);
     viewport.addEventListener("scroll", () => {
       if (!viewport.scrollLeft && !viewport.scrollTop) return;
       view.x -= viewport.scrollLeft;
@@ -1669,7 +1686,14 @@ G|0|Bolt Cutter (Epic)|20000|0||
       viewport.scrollTop = 0;
       applyView();
     });
-    const end = () => { drag = null; viewport.classList.remove("dragging"); };
+    const end = () => {
+      if (drag && drag.moved) {
+        suppressClick = true;
+        setTimeout(() => { suppressClick = false; }, 0);
+      }
+      drag = null;
+      viewport.classList.remove("dragging");
+    };
     viewport.addEventListener("pointerup", end);
     viewport.addEventListener("pointercancel", end);
     viewport.addEventListener("wheel", (event) => {
