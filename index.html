@@ -145,9 +145,12 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
 .picked li span:last-child{font-family:var(--mono);white-space:nowrap}
 .src{font-size:11px;color:var(--muted);margin-top:16px}
 .src a{color:var(--accent)}
-.src .support{display:inline-block;font-weight:600;font-size:12.5px;border:1px solid var(--accent);padding:6px 10px;text-decoration:none}
-.src .support:hover{background:var(--accent);color:var(--accent-text)}
-.src .support:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.supportbox{margin-top:14px}
+.support{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:11px 14px;background:var(--accent);color:var(--accent-text);border:1px solid var(--accent);font:700 15px/1 var(--cond);letter-spacing:.04em;text-transform:uppercase;text-decoration:none}
+.support svg{width:18px;height:18px;flex-shrink:0}
+.support:hover{background:#f5c47a;border-color:#f5c47a}
+.support:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+.supportbox .hint{text-align:center}
 @media (max-width:900px){
   body{overflow:auto}
   .app{flex-direction:column;height:auto}
@@ -214,6 +217,10 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
     </div>
     <div class="check"><input type="checkbox" id="lenny"><label for="lenny" data-i18n="lenny"></label></div>
     <p class="hint" data-i18n="amountHint"></p>
+    <div class="supportbox" id="supportRow" hidden>
+      <a id="supportLink" class="support" rel="noopener noreferrer" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z M16 11h2a2.5 2.5 0 0 1 0 5h-2 M8 3v3 M12 3v3"/></svg><span data-i18n="support"></span></a>
+      <p class="hint" data-i18n="supportHint"></p>
+    </div>
 
     <details>
       <summary data-i18n="extrasTitle"></summary>
@@ -241,7 +248,6 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
     </details>
 
     <p class="src"><span data-i18n="srcPrices"></span> <a href="https://robrunstash.vercel.app/black-market/">robrunstash</a>, <a href="https://metaforge.app/rob-run/best-weapons-in-rob-run">metaforge.app</a>, <span data-i18n="srcRules"></span> <a href="https://robrun.info/mechanics/police/">robrun.info</a>. <span data-i18n="srcPatch"></span></p>
-    <p class="src" id="supportRow" hidden><a id="supportLink" class="support" rel="noopener noreferrer" target="_blank" data-i18n="support"></a></p>
     <p class="src" data-i18n="disclaimer"></p>
   </aside>
 </div>
@@ -306,6 +312,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       srcPatch: "May change with patches.",
       disclaimer: "Fan-made tool. Not affiliated with or endorsed by Kefir. ROB RUN is a trademark of its owner.",
       support: "Support this project",
+      supportHint: "Free, no ads. A coffee helps keep the prices up to date.",
       catD: "Documents", catV: "Vehicles", catC: "Construction", catF: "Furniture",
       catW: "Weapons", catP: "Production", catE: "Equipment", catG: "Gadgets",
       hubUnit: "years per raid",
@@ -390,6 +397,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       srcPatch: "Môžu sa meniť s patchom.",
       disclaimer: "Fanúšikovský nástroj. Nie je spojený s Kefirom ani ním schválený. ROB RUN je ochranná známka svojho vlastníka.",
       support: "Podporiť projekt",
+      supportHint: "Zadarmo a bez reklám. Káva pomôže udržiavať ceny aktuálne.",
       catD: "Dokumenty", catV: "Vozidlá", catC: "Stavby", catF: "Nábytok",
       catW: "Zbrane", catP: "Produkcia", catE: "Výbava", catG: "Gadgety",
       hubUnit: "rokov za raid",
@@ -474,6 +482,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       srcPatch: "Могут меняться с патчами.",
       disclaimer: "Фанатский инструмент. Не связан с Kefir и не одобрен ею. ROB RUN является товарным знаком своего владельца.",
       support: "Поддержать проект",
+      supportHint: "Бесплатно и без рекламы. Кофе помогает поддерживать цены актуальными.",
       catD: "Документы", catV: "Транспорт", catC: "Стройка", catF: "Мебель",
       catW: "Оружие", catP: "Производство", catE: "Снаряжение", catG: "Гаджеты",
       hubUnit: "лет за рейд",
@@ -558,6 +567,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       srcPatch: "Pueden cambiar con los parches.",
       disclaimer: "Herramienta hecha por fans. No está afiliada ni respaldada por Kefir. ROB RUN es una marca registrada de su propietario.",
       support: "Apoya el proyecto",
+      supportHint: "Gratis y sin anuncios. Un café ayuda a mantener los precios al día.",
       catD: "Documentos", catV: "Vehículos", catC: "Construcción", catF: "Muebles",
       catW: "Armas", catP: "Producción", catE: "Equipo", catG: "Gadgets",
       hubUnit: "años por raid",
@@ -642,6 +652,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       srcPatch: "Podem mudar com atualizações.",
       disclaimer: "Ferramenta feita por fãs. Sem afiliação ou endosso da Kefir. ROB RUN é marca registrada do seu proprietário.",
       support: "Apoie o projeto",
+      supportHint: "Grátis e sem anúncios. Um café ajuda a manter os preços atualizados.",
       catD: "Documentos", catV: "Veículos", catC: "Construção", catF: "Móveis",
       catW: "Armas", catP: "Produção", catE: "Equipamento", catG: "Gadgets",
       hubUnit: "anos por raid",
@@ -726,6 +737,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       srcPatch: "Kann sich mit Patches ändern.",
       disclaimer: "Fan-Projekt. Nicht mit Kefir verbunden oder von Kefir unterstützt. ROB RUN ist eine Marke des jeweiligen Inhabers.",
       support: "Projekt unterstützen",
+      supportHint: "Kostenlos und ohne Werbung. Ein Kaffee hilft, die Preise aktuell zu halten.",
       catD: "Dokumente", catV: "Fahrzeuge", catC: "Bau", catF: "Möbel",
       catW: "Waffen", catP: "Produktion", catE: "Ausrüstung", catG: "Gadgets",
       hubUnit: "Jahre pro Raid",
@@ -810,6 +822,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       srcPatch: "Peuvent changer avec les mises à jour.",
       disclaimer: "Outil créé par des fans. Non affilié à Kefir ni approuvé par Kefir. ROB RUN est une marque de son propriétaire.",
       support: "Soutenir le projet",
+      supportHint: "Gratuit et sans publicité. Un café aide à garder les prix à jour.",
       catD: "Documents", catV: "Véhicules", catC: "Construction", catF: "Mobilier",
       catW: "Armes", catP: "Production", catE: "Équipement", catG: "Gadgets",
       hubUnit: "ans par raid",
@@ -894,6 +907,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       srcPatch: "可能随补丁变化。",
       disclaimer: "玩家自制工具，与 Kefir 无关，也未获其认可。ROB RUN 是其所有者的商标。",
       support: "支持本项目",
+      supportHint: "免费且无广告。请我喝杯咖啡，帮助保持价格最新。",
       catD: "文件", catV: "载具", catC: "建筑", catF: "家具",
       catW: "武器", catP: "生产", catE: "装备", catG: "小工具",
       hubUnit: "年 / 每次抢劫",
