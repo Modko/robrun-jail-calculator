@@ -166,7 +166,10 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
 .share svg{width:15px;height:15px;flex-shrink:0;color:var(--muted)}
 .share:hover{border-color:var(--accent)}
 .toast{position:fixed;left:50%;bottom:20px;z-index:20;transform:translateX(-50%);display:flex;align-items:center;gap:14px;max-width:calc(100vw - 32px);padding:10px 14px;background:#1c1c1c;color:var(--text);border:1px solid var(--rule);border-left:3px solid var(--accent);box-shadow:0 8px 20px rgba(0,0,0,.5);font-size:13px}
-.toast[hidden]{display:none}
+.toast[hidden],.toast-undo[hidden]{display:none}
+.toast-undo{flex-shrink:0;padding:4px 8px;border:1px solid var(--accent);background:transparent;color:var(--accent);font:600 12.5px/1 Barlow,system-ui,sans-serif;cursor:pointer}
+.toast-undo:hover{background:var(--accent);color:var(--accent-text)}
+.toast-undo:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 @media (max-width:900px){
   body{overflow:auto}
   .app{flex-direction:column;height:auto}
@@ -207,7 +210,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
     </div>
   </div>
 
-  <div class="toast" id="toast" role="status" aria-live="polite" hidden><span id="toastText"></span></div>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden><span id="toastText"></span><button type="button" class="toast-undo" id="toastUndo" data-i18n="undo" hidden></button></div>
   <aside class="side" aria-live="polite">
     <h2 data-i18n="resultTitle"></h2>
     <div class="big" id="gain">+0</div>
@@ -346,6 +349,8 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       shareManual: "Copy the link from the address bar.",
       shareLoaded: "Shared build loaded.",
       shareInvalid: "This share link could not be read.",
+      undo: "Undo",
+      resetDone: "Selection cleared.",
       catD: "Documents", catV: "Vehicles", catC: "Construction", catF: "Furniture",
       catW: "Weapons", catP: "Production", catE: "Equipment", catG: "Gadgets",
       hubUnit: "years per raid",
@@ -440,6 +445,8 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       shareManual: "Skopíruj odkaz z panela s adresou.",
       shareLoaded: "Načítaný zdieľaný build.",
       shareInvalid: "Tento odkaz sa nedá načítať.",
+      undo: "Späť",
+      resetDone: "Výber je zrušený.",
       catD: "Dokumenty", catV: "Vozidlá", catC: "Stavby", catF: "Nábytok",
       catW: "Zbrane", catP: "Produkcia", catE: "Výbava", catG: "Gadgety",
       hubUnit: "rokov za raid",
@@ -534,6 +541,8 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       shareManual: "Скопируйте ссылку из адресной строки.",
       shareLoaded: "Загружена общая сборка.",
       shareInvalid: "Не удалось прочитать эту ссылку.",
+      undo: "Отменить",
+      resetDone: "Выбор сброшен.",
       catD: "Документы", catV: "Транспорт", catC: "Стройка", catF: "Мебель",
       catW: "Оружие", catP: "Производство", catE: "Снаряжение", catG: "Гаджеты",
       hubUnit: "лет за рейд",
@@ -628,6 +637,8 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       shareManual: "Copia el enlace de la barra de direcciones.",
       shareLoaded: "Build compartida cargada.",
       shareInvalid: "No se pudo leer este enlace.",
+      undo: "Deshacer",
+      resetDone: "Selección borrada.",
       catD: "Documentos", catV: "Vehículos", catC: "Construcción", catF: "Muebles",
       catW: "Armas", catP: "Producción", catE: "Equipo", catG: "Gadgets",
       hubUnit: "años por raid",
@@ -722,6 +733,8 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       shareManual: "Copie o link da barra de endereço.",
       shareLoaded: "Build compartilhada carregada.",
       shareInvalid: "Não foi possível ler este link.",
+      undo: "Desfazer",
+      resetDone: "Seleção limpa.",
       catD: "Documentos", catV: "Veículos", catC: "Construção", catF: "Móveis",
       catW: "Armas", catP: "Produção", catE: "Equipamento", catG: "Gadgets",
       hubUnit: "anos por raid",
@@ -816,6 +829,8 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       shareManual: "Kopiere den Link aus der Adressleiste.",
       shareLoaded: "Geteilter Build geladen.",
       shareInvalid: "Dieser Link konnte nicht gelesen werden.",
+      undo: "Rückgängig",
+      resetDone: "Auswahl gelöscht.",
       catD: "Dokumente", catV: "Fahrzeuge", catC: "Bau", catF: "Möbel",
       catW: "Waffen", catP: "Produktion", catE: "Ausrüstung", catG: "Gadgets",
       hubUnit: "Jahre pro Raid",
@@ -910,6 +925,8 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       shareManual: "Copiez le lien depuis la barre d'adresse.",
       shareLoaded: "Build partagé chargé.",
       shareInvalid: "Impossible de lire ce lien.",
+      undo: "Annuler",
+      resetDone: "Sélection effacée.",
       catD: "Documents", catV: "Véhicules", catC: "Construction", catF: "Mobilier",
       catW: "Armes", catP: "Production", catE: "Équipement", catG: "Gadgets",
       hubUnit: "ans par raid",
@@ -1004,6 +1021,8 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       shareManual: "请从地址栏复制链接。",
       shareLoaded: "已加载分享的配置。",
       shareInvalid: "无法读取此分享链接。",
+      undo: "撤销",
+      resetDone: "已清除选择。",
       catD: "文件", catV: "载具", catC: "建筑", catF: "家具",
       catW: "武器", catP: "生产", catE: "装备", catG: "小工具",
       hubUnit: "年 / 每次抢劫",
@@ -1318,6 +1337,7 @@ G|0|Bolt Cutter (Epic)|20000|0||
   const SHARE_MAX_QTY = 999;
   const SHARE_MAX_TEXT = 100;
   const TOAST_MS = 5000;
+  const TOAST_UNDO_MS = 10000;
   const FEEDBACK_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScLpY6e9iu8rGOJBG-EOl0wsKRyuzonXnHPzyZgfgWAE6aIqg/viewform";
   const FEEDBACK_TYPE_ENTRY = "1274521845";
   const FEEDBACK_DESCRIPTION_ENTRY = "610068089";
@@ -1752,11 +1772,34 @@ G|0|Bolt Cutter (Epic)|20000|0||
   const isShareHash = (hash) => hash.startsWith(SHARE_PACKED) || hash.startsWith(SHARE_PLAIN);
 
   let toastTimer = 0;
-  const showToast = (message) => {
+  let undoSnapshot = null;
+  const hideToast = () => {
+    byId("toast").hidden = true;
+    undoSnapshot = null;
+  };
+  const showToast = (message, previous = null) => {
+    undoSnapshot = previous;
     byId("toastText").textContent = message;
+    byId("toastUndo").hidden = !previous;
     byId("toast").hidden = false;
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => { byId("toast").hidden = true; }, TOAST_MS);
+    toastTimer = setTimeout(hideToast, previous ? TOAST_UNDO_MS : TOAST_MS);
+  };
+  const undo = () => {
+    if (!undoSnapshot) return;
+    const undoWasFocused = document.activeElement === byId("toastUndo");
+    applySnapshot(undoSnapshot);
+    hideToast();
+    render();
+    if (undoWasFocused) byId("reset").focus();
+  };
+  const clearSelection = () => {
+    const previous = snapshot();
+    state.unlocked.clear();
+    state.bought.clear();
+    render();
+    showToast(t("resetDone"), previous);
+    byId("toastUndo").focus();
   };
 
   const copyShareLink = async () => {
@@ -1776,10 +1819,12 @@ G|0|Bolt Cutter (Epic)|20000|0||
     const hash = location.hash;
     history.replaceState(null, "", location.pathname + location.search);
     try {
-      applySnapshot(await decodeShare(hash));
+      const shared = await decodeShare(hash);
+      const previous = snapshot();
+      applySnapshot(shared);
       state.selected = null;
       render();
-      showToast(t("shareLoaded"));
+      showToast(t("shareLoaded"), previous);
     } catch {
       showToast(t("shareInvalid"));
     }
@@ -2002,7 +2047,8 @@ G|0|Bolt Cutter (Epic)|20000|0||
   FIELD_IDS.forEach((id) => byId(id).addEventListener("input", render));
   byId("lenny").addEventListener("change", render);
   byId("addExtra").addEventListener("click", () => { createExtraRow().focus(); });
-  byId("reset").addEventListener("click", () => { state.unlocked.clear(); state.bought.clear(); render(); });
+  byId("reset").addEventListener("click", clearSelection);
+  byId("toastUndo").addEventListener("click", undo);
   byId("shareBtn").addEventListener("click", copyShareLink);
   window.addEventListener("hashchange", loadSharedFromHash);
   setupPanZoom();
