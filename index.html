@@ -62,7 +62,7 @@ body{background:var(--board);color:var(--text);font:14px/1.45 Barlow,system-ui,s
 .tile{position:absolute;width:48px;height:48px;padding:0;border:1px solid var(--tile-border);background:var(--tile);color:var(--tile-text);
   font:600 8.5px/1.05 var(--cond);letter-spacing:.01em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;text-align:center;
   box-shadow:0 1px 0 rgba(0,0,0,.35)}
-.tile .lbl{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;padding:0 3px;word-break:break-word}
+.tile .lbl{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;padding:0 3px;min-width:0;max-width:100%;overflow-wrap:normal;word-break:normal}
 .tile .tier{position:absolute;left:3px;top:2px;font:700 7px/1 var(--cond);color:inherit;opacity:.8}
 .tile .jail{position:absolute;right:-6px;bottom:-7px;font:600 8px/1 var(--mono);background:#1a1a1a;color:var(--accent);border:1px solid #5b4a2c;padding:2px 3px}
 .tile .jail.ok{color:#9fd6a6;border-color:#355a3b}
@@ -1193,6 +1193,7 @@ G|0|Bolt Cutter (Epic)|20000|0||
 
   const TILE = 48, SLOT = 58, LEVEL = 72, CARD_HALF = 46, HUB_HALF_W = 71, HUB_HALF_H = 100, CARD_GAP = 150, LANE_GAP = 40;
   const TIER = ["", "I", "II", "III"];
+  const LABEL_MAX_SIZE = 8.5, LABEL_MIN_SIZE = 6;
   const FIELD_IDS = ["current", "today", "bank", "cash", "other", "rate", "base", "capState", "capDay", "capTotal"];
   const STORAGE_KEY = "robrun-jail-v4";
   const LANG_KEY = "robrun-lang";
@@ -1454,13 +1455,32 @@ G|0|Bolt Cutter (Epic)|20000|0||
         "aria-label": t("tileLabel", item.name, unlocked, qty),
         style: { left: `${originX + pos.x - TILE / 2}px`, top: `${originY + pos.y - TILE / 2}px` },
         onclick: () => select(item.id)
-      }, [el("span", { class: "lbl", text: label })]);
+      });
+      const labelSpan = el("span", { class: "lbl", text: label });
+      tile.append(labelSpan);
       if (item.tier) tile.append(el("span", { class: "tier", text: TIER[item.tier] }));
       if (item.jail) tile.append(el("span", { class: `jail${currentJail >= item.jail ? " ok" : ""}`, text: t("jailBadge", item.jail) }));
       if (qty) tile.append(el("span", { class: "qty", text: `×${qty}` }));
       if (item.requires && itemById.get(item.requires).cat !== item.cat) tile.append(el("span", { class: "ext" }));
       world.append(tile);
+      fitLabel(labelSpan, item.id);
     });
+  };
+
+  const labelSizes = new Map();
+  const fitLabel = (span, key) => {
+    if (labelSizes.has(key)) {
+      span.style.fontSize = labelSizes.get(key);
+      return;
+    }
+    const overflows = () => span.scrollWidth > span.clientWidth || span.scrollHeight > span.clientHeight;
+    let size = LABEL_MAX_SIZE;
+    span.style.fontSize = `${size}px`;
+    while (size > LABEL_MIN_SIZE && overflows()) {
+      size -= 0.5;
+      span.style.fontSize = `${size}px`;
+    }
+    labelSizes.set(key, span.style.fontSize);
   };
 
   const renderDetail = (currentJail) => {
@@ -1731,6 +1751,10 @@ G|0|Bolt Cutter (Epic)|20000|0||
   setupPanZoom();
   render();
   centerView();
+  document.fonts.ready.then(() => {
+    labelSizes.clear();
+    render();
+  });
 })();
 </script>
 </body>
