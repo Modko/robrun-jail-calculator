@@ -132,7 +132,8 @@ dl.stats dt{color:var(--muted)}dl.stats dd{margin:0;text-align:right;font-family
 .fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
 .fields .wide{grid-column:1/-1}
 label{display:block;font-size:11.5px;color:var(--muted);margin-bottom:3px}
-input[type=text]{width:100%;padding:8px 9px;border:1px solid var(--rule);background:#1c1c1c;color:var(--text);font:500 14px/1.2 var(--mono)}
+.search{margin-top:10px}
+input[type=text],input[type=search]{width:100%;padding:8px 9px;border:1px solid var(--rule);background:#1c1c1c;color:var(--text);font:500 14px/1.2 var(--mono)}
 .check{display:flex;gap:8px;align-items:flex-start;margin-top:10px}
 .check label{margin:0;color:var(--text);font-size:13px}
 .hint{font-size:11.5px;color:var(--muted);margin:6px 0 0}
@@ -199,6 +200,10 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
         <span><i style="background:#b9b9b9"></i><span data-i18n="legendUnlocked"></span></span>
         <span><i style="background:#b9b9b9;box-shadow:inset 0 -3px 0 #f0b45a"></i><span data-i18n="legendBought"></span></span>
       </div>
+      <form class="search" id="searchForm" role="search">
+        <input type="search" id="search" list="itemNames" autocomplete="off" data-i18n-aria="search">
+        <datalist id="itemNames"></datalist>
+      </form>
     </div>
 
     <div class="overlay detail" id="detail" aria-live="polite"></div>
@@ -351,6 +356,8 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       shareInvalid: "This share link could not be read.",
       undo: "Undo",
       resetDone: "Selection cleared.",
+      search: "Find item",
+      searchNone: "No item found.",
       catD: "Documents", catV: "Vehicles", catC: "Construction", catF: "Furniture",
       catW: "Weapons", catP: "Production", catE: "Equipment", catG: "Gadgets",
       hubUnit: "years per raid",
@@ -447,6 +454,8 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       shareInvalid: "Tento odkaz sa nedá načítať.",
       undo: "Späť",
       resetDone: "Výber je zrušený.",
+      search: "Nájsť vec",
+      searchNone: "Nič sa nenašlo.",
       catD: "Dokumenty", catV: "Vozidlá", catC: "Stavby", catF: "Nábytok",
       catW: "Zbrane", catP: "Produkcia", catE: "Výbava", catG: "Gadgety",
       hubUnit: "rokov za raid",
@@ -543,6 +552,8 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       shareInvalid: "Не удалось прочитать эту ссылку.",
       undo: "Отменить",
       resetDone: "Выбор сброшен.",
+      search: "Найти предмет",
+      searchNone: "Ничего не найдено.",
       catD: "Документы", catV: "Транспорт", catC: "Стройка", catF: "Мебель",
       catW: "Оружие", catP: "Производство", catE: "Снаряжение", catG: "Гаджеты",
       hubUnit: "лет за рейд",
@@ -639,6 +650,8 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       shareInvalid: "No se pudo leer este enlace.",
       undo: "Deshacer",
       resetDone: "Selección borrada.",
+      search: "Buscar objeto",
+      searchNone: "No se encontró nada.",
       catD: "Documentos", catV: "Vehículos", catC: "Construcción", catF: "Muebles",
       catW: "Armas", catP: "Producción", catE: "Equipo", catG: "Gadgets",
       hubUnit: "años por raid",
@@ -735,6 +748,8 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       shareInvalid: "Não foi possível ler este link.",
       undo: "Desfazer",
       resetDone: "Seleção limpa.",
+      search: "Buscar item",
+      searchNone: "Nenhum item encontrado.",
       catD: "Documentos", catV: "Veículos", catC: "Construção", catF: "Móveis",
       catW: "Armas", catP: "Produção", catE: "Equipamento", catG: "Gadgets",
       hubUnit: "anos por raid",
@@ -831,6 +846,8 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       shareInvalid: "Dieser Link konnte nicht gelesen werden.",
       undo: "Rückgängig",
       resetDone: "Auswahl gelöscht.",
+      search: "Gegenstand suchen",
+      searchNone: "Nichts gefunden.",
       catD: "Dokumente", catV: "Fahrzeuge", catC: "Bau", catF: "Möbel",
       catW: "Waffen", catP: "Produktion", catE: "Ausrüstung", catG: "Gadgets",
       hubUnit: "Jahre pro Raid",
@@ -927,6 +944,8 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       shareInvalid: "Impossible de lire ce lien.",
       undo: "Annuler",
       resetDone: "Sélection effacée.",
+      search: "Chercher un objet",
+      searchNone: "Aucun objet trouvé.",
       catD: "Documents", catV: "Véhicules", catC: "Construction", catF: "Mobilier",
       catW: "Armes", catP: "Production", catE: "Équipement", catG: "Gadgets",
       hubUnit: "ans par raid",
@@ -1023,6 +1042,8 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       shareInvalid: "无法读取此分享链接。",
       undo: "撤销",
       resetDone: "已清除选择。",
+      search: "查找物品",
+      searchNone: "未找到物品。",
       catD: "文件", catV: "载具", catC: "建筑", catF: "家具",
       catW: "武器", catP: "生产", catE: "装备", catG: "小工具",
       hubUnit: "年 / 每次抢劫",
@@ -1378,6 +1399,7 @@ G|0|Bolt Cutter (Epic)|20000|0||
     const currentName = LANGUAGES.find(([code]) => code === lang)[1];
     byId("langBtn").replaceChildren(flagSvg(lang), el("span", { lang, text: currentName }));
     byId("langBtn").setAttribute("aria-label", `${t("language")}: ${currentName}`);
+    byId("search").placeholder = t("search");
     const translationLink = byId("translationLink");
     translationLink.hidden = !feedbackEnabled || lang === "en";
     if (!translationLink.hidden) translationLink.href = feedbackUrl("translation", `Language: ${currentName}\n\n`);
@@ -1979,6 +2001,42 @@ G|0|Bolt Cutter (Epic)|20000|0||
     byId("center").addEventListener("click", centerView);
   };
 
+  const findItem = (query) => {
+    const needle = query.trim().toLowerCase();
+    if (!needle) return null;
+    const name = (item) => item.name.toLowerCase();
+    return ITEMS.find((item) => name(item) === needle)
+      || ITEMS.find((item) => name(item).startsWith(needle))
+      || ITEMS.find((item) => name(item).includes(needle))
+      || null;
+  };
+
+  const focusItem = (id) => {
+    const pos = layout.positions.get(id);
+    const viewport = byId("viewport");
+    view.scale = Math.max(view.scale, 1);
+    view.x = viewport.clientWidth / 2 - (layout.originX + pos.x) * view.scale;
+    view.y = viewport.clientHeight / 2 - (layout.originY + pos.y) * view.scale;
+    applyView();
+    select(id);
+  };
+
+  const setupSearch = () => {
+    const input = byId("search");
+    byId("itemNames").append(...ITEMS.map((item) => el("option", { value: item.name })));
+    byId("searchForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const item = findItem(input.value);
+      if (item) focusItem(item.id);
+      else if (input.value.trim()) showToast(t("searchNone"));
+    });
+    input.addEventListener("input", (event) => {
+      if (event.inputType && event.inputType !== "insertReplacementText") return;
+      const item = ITEMS.find((candidate) => candidate.name === input.value);
+      if (item) focusItem(item.id);
+    });
+  };
+
   const setupLanguagePicker = () => {
     const button = byId("langBtn");
     const list = byId("langList");
@@ -2051,6 +2109,7 @@ G|0|Bolt Cutter (Epic)|20000|0||
   byId("toastUndo").addEventListener("click", undo);
   byId("shareBtn").addEventListener("click", copyShareLink);
   window.addEventListener("hashchange", loadSharedFromHash);
+  setupSearch();
   setupPanZoom();
   render();
   centerView();
