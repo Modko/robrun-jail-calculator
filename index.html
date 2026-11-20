@@ -1926,7 +1926,15 @@ G|0|Bolt Cutter (Epic)|20000|0||
     save();
   }
 
+  const clampAxis = (offset, viewportSize, worldSize) => {
+    const slack = viewportSize - worldSize * view.scale;
+    return Math.min(Math.max(offset, Math.min(0, slack)), Math.max(0, slack));
+  };
+
   const applyView = () => {
+    const viewport = byId("viewport");
+    view.x = clampAxis(view.x, viewport.clientWidth, layout.width);
+    view.y = clampAxis(view.y, viewport.clientHeight, layout.height);
     byId("world").style.transform = `translate(${view.x}px, ${view.y}px) scale(${view.scale})`;
   };
 
@@ -2115,6 +2123,7 @@ G|0|Bolt Cutter (Epic)|20000|0||
   window.addEventListener("hashchange", loadSharedFromHash);
   setupSearch();
   setupPanZoom();
+  window.addEventListener("resize", applyView);
   render();
   centerView();
   loadSharedFromHash();
