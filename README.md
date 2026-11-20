@@ -11,7 +11,7 @@ Production, Equipment, Gadgets).
 - interactive schematics tree with unlock and buy actions
 - live result with server, daily and total limits
 - 8 languages: English, Russian, Spanish, Portuguese (BR), German, French, Simplified Chinese, Slovak
-- works offline as a single static page, no build step, no tracking
+- single static page, no build step, no cookies
 
 ## Run locally
 
@@ -26,7 +26,9 @@ Values are community data and may change with game patches.
 
 ## Privacy
 
-The page stores your selection and language only in your browser (`localStorage`). Nothing is sent anywhere.
+The page stores your selection and language only in your browser (`localStorage`). Shared build links keep the
+selection in the URL hash, which is never sent to a server. Visits are counted anonymously with
+[GoatCounter](https://www.goatcounter.com/) (no cookies, no personal data); it does not count local copies.
 
 ## Fonts
 
