@@ -145,6 +145,8 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
 .picked li span:last-child{font-family:var(--mono);white-space:nowrap}
 .src{font-size:11px;color:var(--muted);margin-top:16px}
 .src a{color:var(--accent)}
+.src.checked{color:var(--text)}
+.src.checked + .src{margin-top:4px}
 .supportbox{margin-top:14px}
 .support{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:11px 14px;background:var(--accent);color:var(--accent-text);border:1px solid var(--accent);font:700 15px/1 var(--cond);letter-spacing:.04em;text-transform:uppercase;text-decoration:none}
 .support svg{width:18px;height:18px;flex-shrink:0}
@@ -257,6 +259,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       <p class="hint" data-i18n="rulesHint"></p>
     </details>
 
+    <p class="src checked" id="pricesChecked"></p>
     <p class="src"><span data-i18n="srcPrices"></span> <a href="https://robrunstash.vercel.app/black-market/">robrunstash</a>, <a href="https://metaforge.app/rob-run/best-weapons-in-rob-run">metaforge.app</a>, <span data-i18n="srcRules"></span> <a href="https://robrun.info/mechanics/police/">robrun.info</a>. <span data-i18n="srcPatch"></span></p>
     <p class="src" data-i18n="disclaimer"></p>
   </aside>
@@ -320,6 +323,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       srcPrices: "Prices:",
       srcRules: "rules:",
       srcPatch: "May change with patches.",
+      pricesChecked: (date) => `Prices last checked: ${date}.`,
       disclaimer: "Fan-made tool. Not affiliated with or endorsed by Kefir. ROB RUN is a trademark of its owner.",
       support: "Support this project",
       supportHint: "Free, no ads. A coffee helps keep the prices up to date.",
@@ -407,6 +411,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       srcPrices: "Ceny:",
       srcRules: "pravidlá:",
       srcPatch: "Môžu sa meniť s patchom.",
+      pricesChecked: (date) => `Ceny naposledy overené: ${date}.`,
       disclaimer: "Fanúšikovský nástroj. Nie je spojený s Kefirom ani ním schválený. ROB RUN je ochranná známka svojho vlastníka.",
       support: "Podporiť projekt",
       supportHint: "Zadarmo a bez reklám. Káva pomôže udržiavať ceny aktuálne.",
@@ -494,6 +499,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       srcPrices: "Цены:",
       srcRules: "правила:",
       srcPatch: "Могут меняться с патчами.",
+      pricesChecked: (date) => `Цены проверены: ${date}`,
       disclaimer: "Фанатский инструмент. Не связан с Kefir и не одобрен ею. ROB RUN является товарным знаком своего владельца.",
       support: "Поддержать проект",
       supportHint: "Бесплатно и без рекламы. Кофе помогает поддерживать цены актуальными.",
@@ -581,6 +587,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       srcPrices: "Precios:",
       srcRules: "reglas:",
       srcPatch: "Pueden cambiar con los parches.",
+      pricesChecked: (date) => `Precios revisados por última vez: ${date}.`,
       disclaimer: "Herramienta hecha por fans. No está afiliada ni respaldada por Kefir. ROB RUN es una marca registrada de su propietario.",
       support: "Apoya el proyecto",
       supportHint: "Gratis y sin anuncios. Un café ayuda a mantener los precios al día.",
@@ -668,6 +675,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       srcPrices: "Preços:",
       srcRules: "regras:",
       srcPatch: "Podem mudar com atualizações.",
+      pricesChecked: (date) => `Preços verificados pela última vez em ${date}.`,
       disclaimer: "Ferramenta feita por fãs. Sem afiliação ou endosso da Kefir. ROB RUN é marca registrada do seu proprietário.",
       support: "Apoie o projeto",
       supportHint: "Grátis e sem anúncios. Um café ajuda a manter os preços atualizados.",
@@ -755,6 +763,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       srcPrices: "Preise:",
       srcRules: "Regeln:",
       srcPatch: "Kann sich mit Patches ändern.",
+      pricesChecked: (date) => `Preise zuletzt geprüft: ${date}.`,
       disclaimer: "Fan-Projekt. Nicht mit Kefir verbunden oder von Kefir unterstützt. ROB RUN ist eine Marke des jeweiligen Inhabers.",
       support: "Projekt unterstützen",
       supportHint: "Kostenlos und ohne Werbung. Ein Kaffee hilft, die Preise aktuell zu halten.",
@@ -842,6 +851,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       srcPrices: "Prix :",
       srcRules: "règles :",
       srcPatch: "Peuvent changer avec les mises à jour.",
+      pricesChecked: (date) => `Prix vérifiés le ${date}.`,
       disclaimer: "Outil créé par des fans. Non affilié à Kefir ni approuvé par Kefir. ROB RUN est une marque de son propriétaire.",
       support: "Soutenir le projet",
       supportHint: "Gratuit et sans publicité. Un café aide à garder les prix à jour.",
@@ -929,6 +939,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
       srcPrices: "价格：",
       srcRules: "规则：",
       srcPatch: "可能随补丁变化。",
+      pricesChecked: (date) => `价格最后核对：${date}。`,
       disclaimer: "玩家自制工具，与 Kefir 无关，也未获其认可。ROB RUN 是其所有者的商标。",
       support: "支持本项目",
       supportHint: "免费且无广告。请我喝杯咖啡，帮助保持价格最新。",
@@ -1242,6 +1253,7 @@ G|0|Bolt Cutter (Epic)|20000|0||
   const STORAGE_KEY = "robrun-jail-v4";
   const LANG_KEY = "robrun-lang";
   const SUPPORT_URL = "https://ko-fi.com/modko";
+  const PRICES_CHECKED = "2026-11-20";
   const FEEDBACK_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScLpY6e9iu8rGOJBG-EOl0wsKRyuzonXnHPzyZgfgWAE6aIqg/viewform";
   const FEEDBACK_TYPE_ENTRY = "1274521845";
   const FEEDBACK_TYPES = { bug: "Bug", feature: "Feature idea" };
@@ -1274,6 +1286,8 @@ G|0|Bolt Cutter (Epic)|20000|0||
     document.title = t("pageTitle");
     document.querySelectorAll("[data-i18n]").forEach((node) => { node.textContent = t(node.dataset.i18n); });
     document.querySelectorAll("[data-i18n-aria]").forEach((node) => { node.setAttribute("aria-label", t(node.dataset.i18nAria)); });
+    const checkedDate = new Intl.DateTimeFormat(t("locale"), { dateStyle: "long", timeZone: "UTC" }).format(new Date(`${PRICES_CHECKED}T00:00:00Z`));
+    byId("pricesChecked").textContent = t("pricesChecked", checkedDate);
     const currentName = LANGUAGES.find(([code]) => code === lang)[1];
     byId("langBtn").replaceChildren(flagSvg(lang), el("span", { lang, text: currentName }));
     byId("langBtn").setAttribute("aria-label", `${t("language")}: ${currentName}`);
